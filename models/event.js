@@ -7,8 +7,11 @@ let EventSchema = new ({
   name: String,
   description: String,
   dateAndtime: String,
-  location: Venue.Schema // QUESTION: proper format for location.address?
+  venue: String,
+  address: String
+  // location: Venue.Schema // QUESTION: proper format for location.address?
 })
+
 
 //create event model
 let Event = mongoose.model('Event', EventSchema);
