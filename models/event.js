@@ -7,7 +7,7 @@ let EventSchema = new ({
   name: String,
   description: String,
   dateAndtime: String,
-  location: Venue.Schema
+  location: Venue.Schema // QUESTION: proper format for location.address?
 })
 
 //create event model
