@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var controllers = require('./controllers');
 
 /*
  * HTML Endpoints
@@ -18,8 +19,10 @@ app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
 // API Endpoints Placeholder
+app.get('/api', controllers.api.index);
+app.get('/api/events', controllers.events.index);
+app.post('/api/events', controllers.events.create);
 
 /**********
  * SERVER *
