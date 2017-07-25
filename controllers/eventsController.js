@@ -7,7 +7,20 @@ function index(req, res) {
     res.json(allEvents);
   });
 }
-// QUESTION: We are exporting the index request function, but the syntax is unfamiliar.
+
+//POST - All Events - create an event based on request body and respond with JSON
+function create (req, res) {
+  console.log(`${req.body} submitted`);
+  db.Event.create(req.body, function (err, event) {
+    if (err) {
+      console.log("Error occurred during post")
+    };
+    console.log("event");
+    res.json(event);
+  })
+}
+
 module.exports = {
   index: index,
+  create: create
 };
