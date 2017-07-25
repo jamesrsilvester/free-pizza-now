@@ -16,24 +16,116 @@
     <title>Free Pizza Now!</title>
   </head>
   <body>
-    <nav class="navbar navbar-default">
+    <div class="jumbotron">
       <div class="container-fluid">
         <div class="navbar-header">
 
-              <div class="container">
-                <!-- <img id="pizzaSlice"src='/images/pizza.png' alt='pizza'> -->
-              </div>
-
+          <div class="container">
+            <!-- logo -->
+            <!-- <img id="pizzaSlice"src='/images/pizza.png' alt='pizza'> -->
+          </div>
+          <nav class="navbar navbar-default">
+            <!-- Nav Bar -->
+            <ul class="nav navbar-nav">
+              <h3>Free Pizza Now</h3>
+              <li><a href="#" id="navSignup">Sign Up</a></li>
+              <li><a href="#" id="navEventsList">Events</a></li>
+              <li><a href="#" id="navVenues">Venues</a></li>
+              <li><a href="#" id="navAbout">About</a></li>
+              <li><a href="#" id="navSignUp">Sign Up</a></li>
+            </ul>
+          </nav>
         </div>
-        <ul class="nav navbar-nav">
-          <h3>Free Pizza Now</h3>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Venues</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Sign Up</a></li>
-        </ul>
       </div>
-    </nav>
+    </div>
+    <section class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h2 id="eventH2"></h2>
+        </div>
+      </div>
+      <!-- display messages -->
+      <div id="messageContainer">
+
+      </div>
+
+      <!-- events -->
+      <div id="eventsContainer">
+
+      </div>
+      <div class="navbar navbar-default navbar-fixed-bottom">
+         <div class="container">
+           <p class="navbar-text pull-left">
+             &copy; 2017 - Site Built By
+             <a href="https://github.com/jamesrsilvester">James Silvester</a> &amp;
+             <a href="https://github.com/calJersey">Some Other Random Dude</a>
+           </p>
+
+           <a href="javascript:alert('FAIL:\nAin\'t nothin\' in life free!&#9785;');" class="navbar-btn btn-danger btn pull-right">
+           <span class="glyphicon glyphicon-star"></span>Click for a chance to win FREE PIZZA!</a>
+         </div>
+       </div>
+    </section>
+
+    <!-- begin songModal: this is not visible until you call .modal() on it -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="eventsModal">
+      <form name="eventAddForm" id="eventAddForm" method="POST" action="javascript.void();">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Create Event</h4>
+          </div>
+          <div class="modal-body">
+
+            <fieldset class='form-horizontal'>
+              <!-- Event name -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="songName">Event Name</label>
+                <div class="col-md-4">
+                  <input id="eventName" name="name" type="text" placeholder="required" class="form-control input-md" required="">
+                </div>
+              </div>
+              <!-- Event desc -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="eventDescription">Event Description</label>
+                <div class="col-md-4">
+                  <textarea name="eventDescription" id="eventDescription" class="form-control input-md" required=""></textarea>
+                </div>
+              </div>
+              <!-- Event Date -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="eventDateAndTime">Event Date &amp; Time</label>
+                <div class="col-md-4">
+                  <input id="eventDateAndTime" name="eventDateAndTime" type="text" placeholder="required" class="form-control input-md" required="">
+                </div>
+              </div>
+              <!-- Event Venue -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="eventVenue">Event Venue</label>
+                <div class="col-md-4">
+                  <input id="eventDateAndTime" name="eventDateAndTime" type="text" placeholder="required" class="form-control input-md" required="">
+                </div>
+              </div>
+              <!-- Event Date -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="eventAddress">Event Address</label>
+                <div class="col-md-4">
+                  <input id="eventAddress" name="eventAddress" type="text" placeholder="required" class="form-control input-md" required="">
+                </div>
+              </div>
+            </fieldset>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveSong">Add Event</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </form>
+    </div><!-- /.modal -->
+
+
   </body>
 </html>
