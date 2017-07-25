@@ -1,25 +1,36 @@
 
-TODO:
+Tasks Completed
 
-Front End
-- Navbar
-- Footer
+Package Creation
+- npm init
+- installed mongoose
+- installed express
+- installed body-parser
 
-Back End:
-Set up Data Structures
-- Schemas
-- Models
-- Controllers
+Server.js Setup
+- required express
+- required body parser
+- served static files from views/ index.html
+- listening at port 5000
 
+Models Setup
+- created events Schema
+- created events model
+- created venue Schema
+- created venue model
+- linked index.js to export models
+- creating events controller
 
-1. Events
- - name
- - Description
- - Date and Time
- - Location
+Created API documentation
+- created apiController.
+- exported API controller.
 
-2. Venues
- - name
- - address
- - description
- - image
+Events controller
+- required models as db
+- created all events get route
+- exported events index route
+
+server.js
+- required controllers in server.js
+- added api docs endpoint
+- added events index endpoint
