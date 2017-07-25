@@ -1,0 +1,9 @@
+.jumbotron {
+  color: gray;
+  display: inline-block;
+}
+
+#pizzaSlice {
+  height: 100px;
+  display: inline-block;
+}
