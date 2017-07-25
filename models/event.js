@@ -3,11 +3,13 @@ let Schema = mongoose.Schema;
 
 let Venue = require('./venue.js');
 
-let EventSchema = new ({
+let EventSchema = new Schema({
   name: String,
   description: String,
-  dateAndtime: String,
-  location: Venue.Schema
+  dateAndTime: String,
+  venue: String,
+  address: String
+  // location: Venue.Schema // QUESTION: proper format for location.address?
 })
 
 //create event model
