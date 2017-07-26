@@ -21,3 +21,7 @@ h3 {
 .navbar-header{
   float: right;
 }
+
+.eventInput{
+  display:none;
+}
