@@ -39,9 +39,31 @@ function destroy(req,res) {
   });
 };
 
+//Update one event // Update // /api/events/:eventId
+function update(req, res) {
+  db.Event.findById(req.params.eventId, function(err, eventToModify) {
+    if (err) {
+      console.log("Error during modify", err);
+    };
+    eventToModify.name = req.body.name;
+    eventToModify.description = req.body.description;
+    eventToModify.dateAndTime = req.body.dateAndTime;
+    eventToModify.venue = req.body.venue;
+    eventToModify.address = req.body.address;
+    eventToModify.save(function(err, eventToModify){
+      if (err) {
+        console.log("error during save", err)
+      };
+    res.json(eventToModify);
+    console.log(eventToModify);
+    })
+  });
+};
+
 module.exports = {
   index: index,
   create: create,
   show: show,
-  destroy: destroy
+  destroy: destroy,
+  update: update
 };
