@@ -4,12 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/styles.css">
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
 
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/styles.css">
     <!-- VENDOR SCRIPTS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
@@ -18,23 +29,23 @@
   <body>
     <div class="jumbotron">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="container">
+          <!-- <h3>Free Pizza Now</h3> -->
 
-          <div class="container">
-            <!-- logo -->
-            <!-- <img id="pizzaSlice"src='/images/pizza.png' alt='pizza'> -->
+          <h3 id="warped">
+            <span class='w0'>F</span><span class='w1'>r</span><span class='w2'>e</span><span class='w3'>e</span><span class='w4'> </span><span class='w5'>P</span><span class='w6'>i</span><span class='w7'>z</span><span class='w8'>z</span><span class='w9'>a</span><span class='w10'> </span><span class='w11'>N</span><span class='w12'>o</span><span class='w13'>w</span><span class='w14'>!</span>
+          </h3>
+          <!-- logo -->
+          <!-- <img id="pizzaSlice"src='/images/pizza.png' alt='pizza'> -->
+          <div class="navbar-header">
+                <a class="btn btn-warning" href="#" id="navSignup">Sign Up</a></li>
+                <a class="btn btn-warning" href="#" id="navEventsList">Events</a></li>
+                <a class="btn btn-warning" href="#" id="navVenues">Venues</a></li>
+                <a class="btn btn-warning" href="#" id="navAbout">About</a></li>
+                <a class="btn btn-warning" href="#" id="navSignUp">Sign Up</a></li>
+              </ul>
+            </nav>
           </div>
-          <nav class="navbar navbar-default">
-            <!-- Nav Bar -->
-            <ul class="nav navbar-nav">
-              <h3>Free Pizza Now</h3>
-              <li><a href="#" id="navSignup">Sign Up</a></li>
-              <li><a href="#" id="navEventsList">Events</a></li>
-              <li><a href="#" id="navVenues">Venues</a></li>
-              <li><a href="#" id="navAbout">About</a></li>
-              <li><a href="#" id="navSignUp">Sign Up</a></li>
-            </ul>
-          </nav>
         </div>
       </div>
     </div>
@@ -51,18 +62,19 @@
 
       <!-- events -->
       <div id="eventsContainer">
-
+        <button id="eventAdd" class=".btn .btn-primary">Add Event</button>
       </div>
       <div class="navbar navbar-default navbar-fixed-bottom">
          <div class="container">
-           <p class="navbar-text pull-left">
+
+          <a href="javascript:alert('FAIL:\nAin\'t nothin\' in life free!&#9785;');" class="navbar-btn btn-danger btn pull-left">
+          <span class="glyphicon glyphicon-star"></span>Click for a chance to win FREE PIZZA!</a>
+           <p class="navbar-text pull-right">
              &copy; 2017 - Site Built By
              <a href="https://github.com/jamesrsilvester">James Silvester</a> &amp;
-             <a href="https://github.com/calJersey">Some Other Random Dude</a>
+             <a href="https://github.com/calJersey">Some Dude</a>
            </p>
 
-           <a href="javascript:alert('FAIL:\nAin\'t nothin\' in life free!&#9785;');" class="navbar-btn btn-danger btn pull-right">
-           <span class="glyphicon glyphicon-star"></span>Click for a chance to win FREE PIZZA!</a>
          </div>
        </div>
     </section>
@@ -95,7 +107,7 @@
               </div>
               <!-- Event Date -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="eventDateAndTime">Event Date &amp; Time</label>
+                <label class="col-md-4 control-label" for="events">Event Date &amp; Time</label>
                 <div class="col-md-4">
                   <input id="eventDateAndTime" name="eventDateAndTime" type="text" placeholder="required" class="form-control input-md" required="">
                 </div>
@@ -104,7 +116,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="eventVenue">Event Venue</label>
                 <div class="col-md-4">
-                  <input id="eventDateAndTime" name="eventDateAndTime" type="text" placeholder="required" class="form-control input-md" required="">
+                  <input id="eventVenue" name="eventVenue" type="text" placeholder="required" class="form-control input-md" required="">
                 </div>
               </div>
               <!-- Event Date -->
