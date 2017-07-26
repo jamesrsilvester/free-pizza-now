@@ -1,5 +1,23 @@
+.body {
+  font-family: 'Slackey', cursive;
+}
 
-#pizzaSlice {
-  height: 40px;
-  display: inline-block;
+
+.jumbotron {
+  background-image: url('http://www.ongoingthemes.com/resta/wp-content/uploads/2017/03/slide01.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  height: 300px;
+  background-color: #fff;
+}
+.jumbotron .container {
+  height: 100px;
+}
+h3 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 64px;
+}
+.navbar-header{
+  float: right;
 }
