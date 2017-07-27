@@ -1,49 +1,15 @@
 console.log("JS is Linked");
 
-
-/* hard-coded data! */
-var sampleEvents = [];
-sampleEvents.push({
-             dateAndTime: 'August 15, 2017 at 3:00pm',
-             name: 'Ladyhawke',
-             desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
-             venue: 'Really Cool Place',
-             address: '555 5th st., New York, NY 07753',
-             image: 'eventImg.jpg',
-             _id: 'a'
-           });
-sampleEvents.push({
-            dateAndTime: 'August 15, 2017 at 3:00pm',
-            name: 'Ladyhawke',
-            desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
-            venue: 'Really Cool Place',
-            address: '555 5th st., New York, NY 07753',
-            image: 'eventImg.jpg',
-            _id: 'b'
-           });
-sampleEvents.push({
-            dateAndTime: 'August 15, 2017 at 3:00pm',
-            name: 'Ladyhawke',
-            desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
-            venue: 'Really Cool Place',
-            address: '555 5th st., New York, NY 07753',
-            image: 'eventImg.jpg',
-            _id: 'c'
-           });
-sampleEvents.push({
-          dateAndTime: 'August 15, 2017 at 3:00pm',
-          name: 'Ladyhawke',
-          desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
-          venue: 'Really Cool Place',
-          address: '555 5th st., New York, NY 07753',
-          image: 'eventImg.jpg',
-          _id: 'd'
-           });
-/* end of hard-coded data */
-
 $(document).ready(function() {
-  // this function takes a single event and renders it to the page
-  renderEvents(sampleEvents);
+  //all events
+    $.ajax({
+      method: 'GET',
+      url: '/api/events',
+      success: handleSuccessGet,
+      error: handleError
+    });
+
+  //renderEvents(sampleEvents);
 
   let eventAddForm = $('#eventAddForm');
   let closeModal = $('#closeModal');
@@ -61,24 +27,12 @@ $(document).ready(function() {
     $.post('/api/events', formData, function(event) {
       console.log(event);
       renderEvent(event);  //render the server's response
-      closeModal.trigger('click');
+      eventAddForm.reset();
     });
   });
-
-  closeModal.on('click', function(e){
-    e.preventDefault();
-    eventAddForm[0].reset();
-    closeModal.attr('data-dismiss','modal');
-  });
-
 });
   // $("#addEvent").on("click")
-//   $.ajax({
-//     method: 'GET',
-//     url: '/api/events',
-//     success: handleSuccess,
-//     error: handleError
-//   });
+
 //
 // });
 
@@ -158,4 +112,13 @@ function renderEvents(eventsList){
   eventsList.forEach( function(item, index){
     renderEvent(item);
   });
+}
+
+function handleSuccessGet(eventsList){
+  console.log(eventsList);
+  renderEvents(eventsList);
+}
+
+function handleError(err){
+  console.log(err);
 }
