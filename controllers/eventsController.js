@@ -35,6 +35,7 @@ function destroy(req,res) {
     if (err) {
       console.log("Error occurred during delete", err)
     };
+    console.log(JSON.stringify(eventToDelete));
     res.json(eventToDelete);
   });
 };

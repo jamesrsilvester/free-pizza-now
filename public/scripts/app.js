@@ -33,6 +33,7 @@ $(document).ready(function() {
 $('#eventsContainer').on('click', '.edit-event', function(e){
 
     e.preventDefault();
+
     let id= $(this).closest('.event').data('event-id'),
     selectorId = `#${id}`,
     selectorIdEventData = `${selectorId} .eventData`,
@@ -44,6 +45,12 @@ $('#eventsContainer').on('click', '.edit-event', function(e){
     $(selectorIdEventData).css("display","none");
     $(selectorIdSaveEvent).css("display","inline-block");
     $(selectorIdEditEvent).css("display","none");
+  });
+
+  $('#eventsContainer').on('click', '.del-event', function(e){
+      e.preventDefault();
+      let id= $(this).closest('.event').data('event-id');
+      handleDeleteEventClick(id);
   });
 
   $('#eventsContainer').on('click', '.save-event', function(e) {
@@ -203,6 +210,24 @@ function updateEventSuccess(event){
   $(selectorIdSaveEvent).css("display","none");
   $(selectorIdEditEvent).css("display","inline");
 
+}
+
+// DELETE EVENT
+// when a delete button for an event is clicked
+function handleDeleteEventClick(eventId) {
+  console.log('someone wants to delete event id=' + eventId );
+  $.ajax({
+    url: '/api/events/' + eventId,
+    method: 'DELETE',
+    success: handleDeleteEventSuccess
+  });
+}
+
+// callback after DELETE /api/events/:id
+function handleDeleteEventSuccess(event) {
+  console.log('removing the following event from the page:', event._id);
+  let selectorID = `#${event._id}`;
+  $(selectorID).remove();
 }
 
 
