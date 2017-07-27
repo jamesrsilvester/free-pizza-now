@@ -21,15 +21,19 @@ $(document).ready(function() {
   //Save New Event
   eventAddForm.on('submit', function(e) {
     e.preventDefault();
-
     let formData = $(this).serialize();
 
     $.post('/api/events', formData, function(event) {
       console.log(event);
       renderEvent(event);  //render the server's response
-      eventAddForm.reset();
+      eventAddForm.trigger('reset');
     });
+
   });
+
+  eventAddForm.on('reset', function(e){
+    closeModal.attr('data-dismiss','modal');
+  })
 });
   // $("#addEvent").on("click")
 
@@ -82,9 +86,9 @@ function renderEvent(event) {
                   </li>
                   <li class="list-group-item">
                     <h4 class='inline-header'>Description:</h4>
-                    <span id="${event._id}-desc" class='eventData'>${event.desc}</span>
+                    <span id="${event._id}-desc" class='eventData'>${event.description}</span>
                     <span id="${event._id}-desc-input-span" class='eventInput'>
-                      <textarea id="${event._id}-desc-input" name="desc" cols="10" rows="5" value="${event.desc}" required></textarea>
+                      <textarea id="${event._id}-desc-input" name="description" cols="10" rows="5" value="${event.description}" required></textarea>
                     </span>
                   </li>
 
