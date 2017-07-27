@@ -39,12 +39,25 @@ $('#eventsContainer').on('click', '.edit-event', function(e){
     selectorIdEventInput = `${selectorId} .eventInput`,
     selectorIdSaveEvent = `${selectorId} .save-event`,
     selectorIdEditEvent = `${selectorId} .edit-event`;
-    console.log(`id: ${selectorId}`);
-    console.log(`selectorIdEventInput: ${selectorIdEventInput}`)
+
     $(selectorIdEventInput).css("display","inline-block");
     $(selectorIdEventData).css("display","none");
     $(selectorIdSaveEvent).css("display","inline-block");
     $(selectorIdEditEvent).css("display","none");
+  });
+
+  $('#eventsContainer').on('click', '.save-event', function(e) {
+    let id= $(this).closest('.event').data('event-id');
+    let formIdSelector = `#${id}-update`;
+    let data = $(formIdSelector).serialize();
+
+    $.ajax({
+      method: 'PUT',
+      url: `/api/events/${id}`,
+      data: data,
+      success: updateEventSuccess,
+      error: handleError
+    });
   });
 
 });
@@ -64,10 +77,7 @@ function renderEvent(event) {
           <!-- begin event internal row -->
             <div class='row'>
               <div class="col-md-3 col-xs-12 thumbnail event-art">
-                <img src="images/events/${event.image}" alt="event image class="eventData"">
-                <span id="${event._id}-image-input-span" class='eventInput'>
-                  <input id="${event._id}-image-input" type="text" name="image" value="${event.image}" size="${event.image.length}" required>
-                </span>
+                <span class="eventImage"><img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage"></span>
               </div>
               <div class="col-md-9 col-xs-12">
                 <ul class="list-group">
@@ -107,7 +117,12 @@ function renderEvent(event) {
                       <textarea id="${event._id}-desc-input" name="description" cols="40" rows="5" required>${event.description}</textarea>
                     </span>
                   </li>
-
+                  <li class="list-group-item eventInput">
+                    <h4 class='inline-header'>Image:</h4>
+                    <span id="${event._id}-image-input-span" class='eventInput'>
+                      <input id="${event._id}-image-input" type="text" name="image"  size="50" value="${event.image}" required>
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -140,6 +155,56 @@ function handleSuccessGet(eventsList){
   console.log(eventsList);
   renderEvents(eventsList);
 }
+
+function updateEventSuccess(event){
+
+  let selectorId = `#${event._id}`,
+  selectorIdEventInput = `${selectorId} .eventInput`,
+  selectorIdEventData = `${selectorId} .eventData`,
+  selectorIdSaveEvent = `${selectorId} .save-event`,
+  selectorIdEditEvent = `${selectorId} .edit-event`,
+
+  selectorEventName = `${selectorId}-name`,
+  selectorDateAndTime = `${selectorId}-dateAndTime`,
+  selectorVenue = `${selectorId}-venue`,
+
+  selectorAddress = `${selectorId}-address`,
+  selectorDesc = `${selectorId}-desc`,
+  selectorImage = `${selectorId}-image`;
+
+  selectorEventNameInput = `${selectorId}-name-input`,
+  selectorDateAndTimeInput = `${selectorId}-dateAndTime-input`,
+  selectorVenueInput = `${selectorId}-venue-input`,
+
+  selectorAddressInput = `${selectorId}-address-input`,
+  selectorDescInput = `${selectorId}-desc-input`,
+  selectorImageInput = `${selectorId}-image-input`;
+
+  eventName = $(selectorEventNameInput).val();
+  $(selectorEventName).html(eventName);
+
+  dateAndTime = $(selectorDateAndTime).val();
+  $(selectorDateAndTime).html(eventName);
+
+  venue = $(selectorVenueInput).val();
+  $(selectorVenue).html(venue);
+
+  address = $(selectorAddressInput).val();
+  $(selectorAddress).html(address);
+
+  description = $(selectorDescInput).val();
+  $(selectorDesc).html(description);
+
+  image = $(selectorImageInput).val();
+  $(selectorImage).attr('src',image);
+
+  $(selectorIdEventInput).css("display","none");
+  $(selectorIdEventData).css("display","inline");
+  $(selectorIdSaveEvent).css("display","none");
+  $(selectorIdEditEvent).css("display","inline");
+
+}
+
 
 function handleError(err){
   console.log(err);

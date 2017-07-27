@@ -25,6 +25,10 @@ body {
   height: 100px;
 }
 
+.eventImage {
+  max-width:150px;
+}
+
 h3 {
   font-family: 'Slackey', cursive;
   font-size: 64px;
