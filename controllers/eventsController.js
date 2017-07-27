@@ -50,6 +50,7 @@ function update(req, res) {
     eventToModify.dateAndTime = req.body.dateAndTime;
     eventToModify.venue = req.body.venue;
     eventToModify.address = req.body.address;
+    eventToModify.image = req.body.image;
     eventToModify.save(function(err, eventToModify){
       if (err) {
         console.log("error during save", err)
