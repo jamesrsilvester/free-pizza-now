@@ -8,7 +8,8 @@ let EventSchema = new Schema({
   description: String,
   dateAndTime: String,
   venue: String,
-  address: String
+  address: String,
+  image: String
   // location: Venue.Schema // QUESTION: proper format for location.address?
 })
 
