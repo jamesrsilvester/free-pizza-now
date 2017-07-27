@@ -45,10 +45,33 @@ $(document).ready(function() {
   // this function takes a single event and renders it to the page
   renderEvents(sampleEvents);
 
+  let eventAddForm = $('#eventAddForm');
+  let closeModal = $('#closeModal');
+  // Add Event Button Clicked
   $('#eventAdd').on('click', function(e) {
-    console.log('here');
       $('#eventsModal').modal();
     });
+
+  //Save New Event
+  eventAddForm.on('submit', function(e) {
+    e.preventDefault();
+
+    let formData = $(this).serialize();
+
+    $.post('/api/events', formData, function(event) {
+      console.log(event);
+      renderEvent(event);  //render the server's response
+      closeModal.trigger('click');
+    });
+  });
+
+  closeModal.on('click', function(e){
+    e.preventDefault();
+    eventAddForm[0].reset();
+    closeModal.attr('data-dismiss','modal');
+  });
+
+});
   // $("#addEvent").on("click")
 //   $.ajax({
 //     method: 'GET',
@@ -57,7 +80,7 @@ $(document).ready(function() {
 //     error: handleError
 //   });
 //
-});
+// });
 
 function renderEvent(event) {
 
@@ -107,7 +130,7 @@ function renderEvent(event) {
                     <h4 class='inline-header'>Description:</h4>
                     <span id="${event._id}-desc" class='eventData'>${event.desc}</span>
                     <span id="${event._id}-desc-input-span" class='eventInput'>
-                      <textarea id="${event._id}-desc-input" name="desc" cols="10" rows="5" value="${event.desc}" required>
+                      <textarea id="${event._id}-desc-input" name="desc" cols="10" rows="5" value="${event.desc}" required></textarea>
                     </span>
                   </li>
 
@@ -116,7 +139,6 @@ function renderEvent(event) {
             </div>
             <!-- end of event internal row -->
             <div class='panel-footer'>
-              // <button class='btn btn-primary add-song'>Add Song</button>
               <button class='btn btn-primary del-event'>Delete Event</button>
               <button class='btn btn-primary edit-event'>Edit Event</button>
               <button class='btn btn-primary save-event'>Save Changes</button>
