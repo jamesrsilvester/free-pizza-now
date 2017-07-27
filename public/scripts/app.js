@@ -9,7 +9,8 @@ sampleEvents.push({
              desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
              venue: 'Really Cool Place',
              address: '555 5th st., New York, NY 07753',
-             image: 'eventImg.jpg'
+             image: 'eventImg.jpg',
+             _id: 'a'
            });
 sampleEvents.push({
             dateAndTime: 'August 15, 2017 at 3:00pm',
@@ -17,7 +18,8 @@ sampleEvents.push({
             desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
             venue: 'Really Cool Place',
             address: '555 5th st., New York, NY 07753',
-            image: 'eventImg.jpg'
+            image: 'eventImg.jpg',
+            _id: 'b'
            });
 sampleEvents.push({
             dateAndTime: 'August 15, 2017 at 3:00pm',
@@ -25,7 +27,8 @@ sampleEvents.push({
             desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
             venue: 'Really Cool Place',
             address: '555 5th st., New York, NY 07753',
-            image: 'eventImg.jpg'
+            image: 'eventImg.jpg',
+            _id: 'c'
            });
 sampleEvents.push({
           dateAndTime: 'August 15, 2017 at 3:00pm',
@@ -33,19 +36,20 @@ sampleEvents.push({
           desc: 'Massa etiam, tortor pede enim tortor, ut blandit gravida aptent, repellat ridiculus. Tellus consectetuer tortor et nec. Interdum tempor vivamus eleifend mus quis wisi, libero ac feugiat scelerisque aut ac ea. Vitae ridiculus. At quam mus facilisis ac sed, mi egestas mauris nullam nec ridiculus, et platea ligula. Tincidunt mi. Velit integer praesent, egestas mattis doloremque consectetuer lobortis et sit, nullam nonummy mauris ac id ligula, viverra wisi amet metus, pretium viverra porttitor. Urna lacinia sem tortor, posuere ligula nulla lacinia eget enim. Non ut dui praesent ullamcorper, dolor eu blandit, ligula maecenas. Proin leo ipsum consectetuer fermentum quam, nunc aliquet, eget vel nec lectus ut. Pede mauris ligula, augue eu et eu ultrices wisi, luctus nibh turpis arcu, faucibus sem sed morbi. Cum etiam hac at, velit pellentesque sollicitudin potenti aenean urna.',
           venue: 'Really Cool Place',
           address: '555 5th st., New York, NY 07753',
-          image: 'eventImg.jpg'
+          image: 'eventImg.jpg',
+          _id: 'd'
            });
 /* end of hard-coded data */
 
 $(document).ready(function() {
   // this function takes a single event and renders it to the page
   renderEvents(sampleEvents);
-  $('#addEvents').on('click', function(e) {
-      var id= $(this).closest('.event').data('event-id'); // "5665ff1678209c64e51b4e7b"
-      $('#eventsModal').attr('data-event-id',id);
-      $('#eventsModal').modal()
+
+  $('#eventAdd').on('click', function(e) {
+    console.log('here');
+      $('#eventsModal').modal();
     });
-  $("#addEvent").on("click")
+  // $("#addEvent").on("click")
 //   $.ajax({
 //     method: 'GET',
 //     url: '/api/events',
@@ -56,11 +60,9 @@ $(document).ready(function() {
 });
 
 function renderEvent(event) {
-  console.log('rendering event', event);
-
 
   let eventHtml = (`
-    <div class="row event" id="${event._id}" data-event-id="${event._id}">
+    <div class="event" id="${event._id}" data-event-id="${event._id}">
     <form id="${event._id}-update" action="#" onsubmit="return false" method="PUT" class="event-update-form" name="${event._id}-update">
       <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
