@@ -10,9 +10,9 @@ $(document).ready(function() {
     });
 
   //renderEvents(sampleEvents);
-
   let eventAddForm = $('#eventAddForm');
   let closeModal = $('#closeModal');
+
   // Add Event Button Clicked
   $('#eventAdd').on('click', function(e) {
       $('#eventsModal').modal();
@@ -22,18 +22,31 @@ $(document).ready(function() {
   eventAddForm.on('submit', function(e) {
     e.preventDefault();
     let formData = $(this).serialize();
-
+    //POST to node
     $.post('/api/events', formData, function(event) {
       console.log(event);
       renderEvent(event);  //render the server's response
       eventAddForm.trigger('reset');
     });
-
   });
 
-  eventAddForm.on('reset', function(e){
-    closeModal.attr('data-dismiss','modal');
-  })
+$('#eventsContainer').on('click', '.edit-event', function(e){
+
+    e.preventDefault();
+    let id= $(this).closest('.event').data('event-id'),
+    selectorId = `#${id}`,
+    selectorIdEventData = `${selectorId} .eventData`,
+    selectorIdEventInput = `${selectorId} .eventInput`,
+    selectorIdSaveEvent = `${selectorId} .save-event`,
+    selectorIdEditEvent = `${selectorId} .edit-event`;
+    console.log(`id: ${selectorId}`);
+    console.log(`selectorIdEventInput: ${selectorIdEventInput}`)
+    $(selectorIdEventInput).css("display","inline-block");
+    $(selectorIdEventData).css("display","none");
+    $(selectorIdSaveEvent).css("display","inline-block");
+    $(selectorIdEditEvent).css("display","none");
+  });
+
 });
   // $("#addEvent").on("click")
 
@@ -51,7 +64,10 @@ function renderEvent(event) {
           <!-- begin event internal row -->
             <div class='row'>
               <div class="col-md-3 col-xs-12 thumbnail event-art">
-                <img src="images/events/${event.image}" alt="event image">
+                <img src="images/events/${event.image}" alt="event image class="eventData"">
+                <span id="${event._id}-image-input-span" class='eventInput'>
+                  <input id="${event._id}-image-input" type="text" name="image" value="${event.image}" size="${event.image.length}" required>
+                </span>
               </div>
               <div class="col-md-9 col-xs-12">
                 <ul class="list-group">
@@ -88,7 +104,7 @@ function renderEvent(event) {
                     <h4 class='inline-header'>Description:</h4>
                     <span id="${event._id}-desc" class='eventData'>${event.description}</span>
                     <span id="${event._id}-desc-input-span" class='eventInput'>
-                      <textarea id="${event._id}-desc-input" name="description" cols="10" rows="5" value="${event.description}" required></textarea>
+                      <textarea id="${event._id}-desc-input" name="description" cols="40" rows="5" required>${event.description}</textarea>
                     </span>
                   </li>
 
@@ -96,10 +112,12 @@ function renderEvent(event) {
               </div>
             </div>
             <!-- end of event internal row -->
-            <div class='panel-footer'>
-              <button class='btn btn-primary del-event'>Delete Event</button>
-              <button class='btn btn-primary edit-event'>Edit Event</button>
-              <button class='btn btn-primary save-event'>Save Changes</button>
+            <div class='row'>
+              <div class='panel-footer'>
+                <button class='btn btn-primary del-event pull-right'>Delete Event</button>
+                <button class='btn btn-primary edit-event pull-right'>Edit Event</button>
+                <button class='btn btn-primary save-event pull-right'>Save Changes</button>
+              </div>
             </div>
           </div>
         </div>

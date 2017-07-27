@@ -6,6 +6,7 @@ body {
 .btn {
   padding: 4px 12px;
   color: #fff;
+  margin: 4px;
 }
 
 
@@ -51,10 +52,19 @@ h2 {
   padding: 2px;
   margin: 2px;
 }
+.panel-footer{
+  width: 100%;
+  height: 60px;
+}
 
-.eventInput{
+.eventData, .edit-event{
+  display:inline-block;
+}
+.eventInput, .save-event{
   display:none;
 }
+
+
 
 #eventAdd {
   margin-bottom: 10px;
