@@ -3,53 +3,47 @@ var db = require('../models');
 // GET /api/venues
 function index(req, res) {
   // send back all venues as JSON
-  db.Event.find({}, function(err, allEvents) {
-    res.json(allEvents);
+  db.Venue.find({}, function(err, allVenues) {
+    if (err){res.status(500).json({error:err.message});};
+    res.json(allVenues);
   });
 }
 
-// GET /api/venues/:eventId
+// GET /api/venues/:venueId
 function show(req, res) {
-  db.Event.findById(req.params.eventId, function (err, foundEvent){
+  db.Venue.findById(req.params.venueId, function (err, foundVenue){
     if (err){res.status(500).json({error:err.message});};
-    res.json(foundEvent);
+    res.json(foundVenue);
   })
 };
 
-//POST - All Events - create an event based on request body and respond with JSON
+//POST - All Venues - create an venue based on request body and respond with JSON
 function create (req, res) {
-  console.log(`${req.body} submitted`);
-  db.Event.create(req.body, function (err, event) {
+  db.Venue.create(req.body, function (err, venue) {
     if (err){res.status(500).json({error:err.message});};
-    console.log("event posted");
-    res.json(event);
+    res.json(venue);
   })
 }
 
-//Delete one event // DELETE // /api/venues/:eventId
+//Delete one venue // DELETE // /api/venues/:venueId
 function destroy(req,res) {
-  console.log(req.params.eventId);
-  db.Event.findOneAndRemove({_id:req.params.eventId}, function (err, eventToDelete){
+  db.Venue.findOneAndRemove({_id:req.params.venueId}, function (err, venueToDelete){
     if (err){res.status(500).json({error:err.message});};
-    console.log(JSON.stringify(eventToDelete));
-    res.json(eventToDelete);
+    res.json(venueToDelete);
   });
 };
 
-//Update one event // Update // /api/venues/:eventId
+//Update one venue // Update // /api/venues/:venueId
 function update(req, res) {
-  db.Event.findById(req.params.eventId, function(err, eventToModify) {
+  db.Venue.findById(req.params.venueId, function(err, venueToModify) {
     if (err){res.status(500).json({error:err.message});};
-    eventToModify.name = req.body.name;
-    eventToModify.description = req.body.description;
-    eventToModify.dateAndTime = req.body.dateAndTime;
-    eventToModify.venue = req.body.venue;
-    eventToModify.address = req.body.address;
-    eventToModify.image = req.body.image;
-    eventToModify.save(function(err, eventToModify){
+    venueToModify.name = req.body.name;
+    venueToModify.address = req.body.address;
+    venueToModify.description = req.body.description;
+    venueToModify.image = req.body.image;
+    venueToModify.save(function(err, venueToModify){
     if (err){res.status(500).json({error:err.message});};
-    res.json(eventToModify);
-    console.log(eventToModify);
+    res.json(venueToModify);
     })
   });
 };

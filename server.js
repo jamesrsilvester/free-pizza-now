@@ -21,13 +21,14 @@ app.get('/', function homepage (req, res) {
 
 // API Endpoints Placeholder
 app.get('/api', controllers.api.index);
+//events
 app.get('/api/events', controllers.events.index);
 app.get('/api/events/:eventId', controllers.events.show);
 app.delete('/api/events/:eventId', controllers.events.destroy);
 app.post('/api/events', controllers.events.create);
 app.put('/api/events/:eventId', controllers.events.update);
-//venues
 
+//venues
 app.get('/api/venues', controllers.venues.index);
 app.get('/api/venues/:venueId', controllers.venues.show);
 app.delete('/api/venues/:venueId', controllers.venues.destroy);
