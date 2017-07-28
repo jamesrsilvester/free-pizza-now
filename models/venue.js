@@ -2,10 +2,10 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let VenueSchema = new Schema({
-  name: String,
-  address: String,
-  description: String,
-  image: String
+  Name: String,
+  Address: String,
+  Description: String,
+  Image: String
 })
 
 let Venue = mongoose.model("Venue", VenueSchema);
