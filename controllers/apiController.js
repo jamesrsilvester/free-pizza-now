@@ -10,6 +10,11 @@ function index(req, res){
       method: "GET", path: "/api/events/:eventId", description: "show page for each event",
       method: "DELETE", path: "/api/events/:eventId", description: "delete individual event",
       method: "PUT", path: "/api/events/:eventId", description: "modify existing individual event",
+      method: "GET", path: "/api/events", description: "all venues",
+      method: "POST", path: "/api/events", description: "add new venue",
+      method: "GET", path: "/api/venues/:venueId", description: "show page for each venue",
+      method: "DELETE", path: "/api/venues/:venueId", description: "delete individual venue",
+      method: "PUT", path: "/api/venues/:venueId", description: "modify existing individual venue",
     }]
   })
 };
