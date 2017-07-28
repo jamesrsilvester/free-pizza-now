@@ -2,8 +2,8 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let VenueSchema = new Schema({
-  name: String,
-  address: String,
+  Name: String,
+  Address: String,
   Description: String
 })
 
