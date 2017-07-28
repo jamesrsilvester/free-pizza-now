@@ -1,14 +1,14 @@
 var db = require('../models');
 
-// GET /api/events
+// GET /api/venues
 function index(req, res) {
-  // send back all events as JSON
+  // send back all venues as JSON
   db.Event.find({}, function(err, allEvents) {
     res.json(allEvents);
   });
 }
 
-// GET /api/events/:eventId
+// GET /api/venues/:eventId
 function show(req, res) {
   db.Event.findById(req.params.eventId, function (err, foundEvent){
     if (err){res.status(500).json({error:err.message});};
@@ -26,7 +26,7 @@ function create (req, res) {
   })
 }
 
-//Delete one event // DELETE // /api/events/:eventId
+//Delete one event // DELETE // /api/venues/:eventId
 function destroy(req,res) {
   console.log(req.params.eventId);
   db.Event.findOneAndRemove({_id:req.params.eventId}, function (err, eventToDelete){
@@ -36,7 +36,7 @@ function destroy(req,res) {
   });
 };
 
-//Update one event // Update // /api/events/:eventId
+//Update one event // Update // /api/venues/:eventId
 function update(req, res) {
   db.Event.findById(req.params.eventId, function(err, eventToModify) {
     if (err){res.status(500).json({error:err.message});};

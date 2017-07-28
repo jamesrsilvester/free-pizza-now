@@ -4,7 +4,8 @@ let Schema = mongoose.Schema;
 let VenueSchema = new Schema({
   name: String,
   address: String,
-  Description: String
+  description: String,
+  image: String
 })
 
 let Venue = mongoose.model("Venue", VenueSchema);

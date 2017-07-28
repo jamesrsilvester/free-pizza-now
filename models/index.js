@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/freepizzanow");
 
-var Event = require('./event');
-
+let Event = require('./event');
+let Venue = require('./venue');
 module.exports.Event = Event;
-module.exports.Venue = require('./venue');
+module.exports.Venue = Venue;
