@@ -27,13 +27,8 @@ app.get('/api/events/:eventId', controllers.events.show);
 app.delete('/api/events/:eventId', controllers.events.destroy);
 app.post('/api/events', controllers.events.create);
 app.put('/api/events/:eventId', controllers.events.update);
+app.post('/api/events/eventBrite', controllers.events.importEventBrite);
 
-//venues
-app.get('/api/venues', controllers.venues.index);
-app.get('/api/venues/:venueId', controllers.venues.show);
-app.delete('/api/venues/:venueId', controllers.venues.destroy);
-app.post('/api/venues', controllers.venues.create);
-app.put('/api/venues/:venueId', controllers.venues.update);
 
 /**********
  * SERVER *
