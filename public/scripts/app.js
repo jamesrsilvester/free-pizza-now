@@ -115,11 +115,10 @@ function loadAbout(){
 
 
   let contentContainerContent = `
-  <h5>The Free Pizza Now Story</h5>
-  <h4><strong>Free Pizza Now</strong> is the brainchild of one <span style="font-size: 18px;">Mr. James Silvester</span>,
-  a man with an unquenchable desire for 3 things: <span style="font-weight: bold; color: red;">Free stuff, Pizza, and Immediacy</span>.</h4>
-  <img src="images/james.jpg" class="aboutImage pull-right">
-  <blockquote>
+  <h4><strong>The Free Pizza Now Story</strong></h4>
+  <h5><strong>Free Pizza Now</strong> is about 3 things: <span style="font-weight: bold; color: red;">Free stuff, Pizza, and Immediacy</span>.</h5>
+  <img id = "aboutphoto" src="images/pizzag.jpeg" class="aboutImage pull-right">
+  <p>
     I was sitting at my shared workspace table one day, overwhelmed by hunger. I couldn't concentrate. I felt dizzy.
     My vision blurred. I swore, as I tried to focus on the presentation, that I must be seeing things. (No one's beard
     could really be that long, could it?)
@@ -140,7 +139,7 @@ function loadAbout(){
 
     What could I do? I had to come up with a plan. A plan for free pizza. And I was literally starving. so this had to happen fast.
     In that moment, my needs now clearly understood, it hit me: what I needed was: FREE PIZZA NOW!
-  </blockquote>
+  </p>
   <p>While we would love to tell you that our brilliant and inspirational founder, James (AKA JayBird) Silvester, was able to somehow
   manufacture free pizza from thin air, the truth is it took many many months of tireless labor, daring risks, and hungry late nights
   in front of his Macbook developing what we all now know as 2017's Killer App. James, of course, made  asuccessful exit from Free
