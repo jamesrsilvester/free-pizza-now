@@ -1,14 +1,99 @@
 body {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: 'Nunito', sans-serif;
   font-weight: 400;
 }
+
+p.large {
+  font-size: 20px;
+}
+
+h1 {
+  font-family: Combo, sans-serif;
+  font-size: 80px;
+  font-weight: 700;
+  color: #2e6da3
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  font-family: Combo, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: #2e6da3
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  font-family: Combo, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #2e6da3
+  padding: 0;
+  margin: 0;
+}
+
+span.nameRevealWrap {
+  white-space: nowrap;
+  height: 20px;
+  max-height:30px;
+  background-color: transparent;
+  background-image: none;
+  clear: both;
+  display:block;
+  border: 0px;
+}
+
+span.nameReveal {
+  width:100%;
+  float:left;
+  overflow-x: hidden;
+  display: inline;
+  height: 20px;
+  max-height: 30px;
+  background-color: transparent;
+  background-image: none;
+  border: 0px;
+}
+
+.clear{
+  clear:both;
+  background-color: transparent;
+  background-image: none;
+}
+
+.aboutImage {
+  max-width: 250px;
+  border: 2px solid #ec971e;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bigRed {
+  font-weight: bold;
+  color: #f00;
+}
+
+.imgCaption {
+  align:center;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+  border: 2px solid #ec971e;
+  padding: 2px;
+  margin: 5px;
+}
+
+.col-xs-1{border:1px solid #000;}
 
 .btn {
   padding: 4px 12px;
   color: #fff;
   margin: 4px;
 }
-
 
 .jumbotron {
   background-image: url('../images/template/slide01.jpg');
@@ -18,68 +103,141 @@ body {
   height: 200px;
   background-color: #fff;
   padding-top: 7px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .jumbotron .container {
-  height: 100px;
-}
-
-.eventImage {
-  max-width:150px;
-}
-
-.aboutImage {
-  border: 2px solid #ec971e;
-}
-
-h1 {
-  font-family: 'Slackey', cursive;
-  font-size: 64px;
-  padding: 0;
-  margin: 0;
-}
-
-h2 {
-  font-family: 'Slackey', cursive;
-  font-size: 64px;
-  padding: 0;
-  margin: 0;
-}
-
-h3 {
-  font-family: 'Slackey', cursive;
-  font-size: 48px;
-  padding: 0;
-  margin: 0;
-}
-
-.navbar-header {
-  float: right;
-  background-color: #fff;
-  padding: 7px 7px 7px 7px;
-  border-radius: 6px;
-  margin-top: 7px;
-  margin-right: 7px;
+  height: 200px;
 }
 
 .row {
   padding: 2px;
   margin: 2px;
 }
-.panel-footer{
-  width: 100%;
-  height: 60px;
+
+/*.panel-default, .panel {
+
+  max-height:500px;
+  height: 500px;
+}*/
+
+.panel, .modal-header {
+  border-bottom:2px solid #ec971e;
+  border-left:2px solid #ec971e;
+  border-right:2px solid #ec971e;
+  border-top: 0px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #ec971e;
+  background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
+  background-repeat: repeat-x;
 }
 
-.eventData, .edit-event{
+.panel-title {
+  background-color: transparent;
+  color: #fff;
+  background: transparent;
+}
+
+.panel-default>.panel-heading, .modal-header  {
+  /*border-top-left-radius: 6px;
+  border-top-right-radius: 6px;*/
+  background-image:none;
+  background-color: #ec971e;
+  background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
+  background-repeat: repeat-x;
+  color: #fff;
+  border-bottom:0px;
+}
+
+.panel-footer, .modal-footer {
+  width: 100%;
+  height: 60px;
+  border:0px;
+  background-image:none;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
+  background-repeat: repeat-x;
+}
+
+.eventImage {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+.modal-body {
+  border:0px;
+  padding:4px;
+  background-color: #f5f5f5;
+}
+
+.eventContent  {
+  border-top: 2px solid #ec971e;
+  padding:4px;
+  position: relative;
+  max-height: 200px;
+  height: 200px;
+  overflow-y: scroll;
+  background-color: #f5f5f5;
+}
+
+.eventDesc {
+  height:
+}
+
+.form-control {
+  width: 50%;
+}
+
+.greyBack {
+  background-color: #e0e0e0;
+  border-radius: 6px;
+}
+.navbar {
+  min-height: 0px;
+  padding: 7px 7px 7px 7px;
+  border-radius: 6px;
+  margin-top: 7px;
+  margin-right: 0px;
+  right:0px;
+}
+.navbar-default{
+  background-image: none;
+}
+.navbar-fixed-bottom {
+  background-color: #e0e0e0;
+}
+
+.div  {border: 1px solid #000;}
+
+.edit-event{
   display:inline-block;
 }
-.eventInput, .save-event{
+
+.save-event{
   display:none;
 }
 
+.hiddenContainer {
+  visibility: hidden;
+  position: relative;
+}
 
+.hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+
+#pageContents{
+  height: 100%;
+}
+
+#bottomPad{
+  height: 80px;
+  width: 100%;
+}
 
 #eventAdd {
   margin-bottom: 10px;

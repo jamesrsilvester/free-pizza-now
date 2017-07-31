@@ -3,9 +3,10 @@ console.log("JS is Linked");
 $(document).ready(function() {
 
   //renderEvents(sampleEvents);
-  let eventAddForm = $('#eventAddForm');
+  let modalEventForm = $('#modalEventForm');
   let closeModal = $('#closeModal');
   let currPage = 'Home';
+  let numArticles = 0;
   loadHome();
 
   //nav
@@ -24,8 +25,18 @@ $(document).ready(function() {
       loadAbout();
     }
   });
+
+  $("#navSignUp").on("click", function(e){
+    e.preventDefault();
+    if (currPage !== 'SignUp'){
+      currPage = 'SignUp';
+      loadSignUp();
+    }
+  });
   // Add Event Button Clicked
   $('#eventAdd').on('click', function(e) {
+      $("#saveEvent").html("Add Event");
+      $("#modalH4").html("Create Event");
       $('#eventsModal').modal();
     });
 
@@ -33,33 +44,56 @@ $(document).ready(function() {
     event.preventDefault();
     getEventBriteEvents();
   });
+
   //Save New Event
-  eventAddForm.on('submit', function(e) {
+  modalEventForm.on('submit', function(e) {
     e.preventDefault();
+
+    let eventId = $("#modalEventId").val();
     let formData = $(this).serialize();
-    //POST to node
-    $.post('/api/events', formData, function(event) {
-      console.log(event);
-      renderEvent(event);  //render the server's response
-      resetEventForm();
-    });
+console.log($("#modalEventId").val());
+    //put request if an id is present
+    if (eventId){
+      $.ajax({
+        method: 'PUT',
+        url: `/api/events/${eventId}`,
+        data: formData,
+        success: updateEventSuccess,
+        error: handleError
+      });
+    } else {
+
+      //POST to node
+      $.post('/api/events', formData, function(event) {
+        console.log(event);
+        renderEvent(event);  //render the server's response
+        resetEventForm();
+      });
+    }
   });
 
   $('#contentContainer').on('click', '.edit-event', function(e){
-
     e.preventDefault();
 
     let id= $(this).closest('.event').data('event-id'),
     selectorId = `#${id}`,
-    selectorIdEventData = `${selectorId} .eventData`,
-    selectorIdEventInput = `${selectorId} .eventInput`,
-    selectorIdSaveEvent = `${selectorId} .save-event`,
-    selectorIdEditEvent = `${selectorId} .edit-event`;
+    selectorIdEventName = `${selectorId}-name`,
+    selectorIdEventDateAndTime = `${selectorId}-dateAndTime`,
+    selectorIdEventVenue = `${selectorId}-venue`,
+    selectorIdEventAddress = `${selectorId}-address`,
+    selectorIdEventDesc = `${selectorId}-desc`,
+    selectorIdEventImage = `${selectorId}-image`
 
-    $(selectorIdEventInput).css("display","inline-block");
-    $(selectorIdEventData).css("display","none");
-    $(selectorIdSaveEvent).css("display","inline-block");
-    $(selectorIdEditEvent).css("display","none");
+    $("#modalEventId").val(id);
+    $("#modalEventForm input[name=name]").val($(selectorIdEventName).attr("data-select"));
+    $("#description").val($(selectorIdEventDesc).html());
+    $("#modalEventForm input[name=dateAndTime]").val($(selectorIdEventDateAndTime).attr("data-select"));
+    $("#modalEventForm input[name=venue").val($(selectorIdEventVenue).attr("data-select"));
+    $("#modalEventForm input[name=address]").val($(selectorIdEventAddress).attr("data-select"));
+    $("#modalEventForm input[name=image]").val($(selectorIdEventImage).attr("src"));
+    $("#saveEvent").html("Save Event");
+    $("#modalH4").html("Edit Event");
+    $('#eventsModal').modal();
   });
 
   $('#contentContainer').on('click', '.del-event', function(e){
@@ -68,36 +102,37 @@ $(document).ready(function() {
       handleDeleteEventClick(id);
   });
 
-  $('#contentContainer').on('click', '.save-event', function(e) {
-    let id= $(this).closest('.event').data('event-id');
-    let formIdSelector = `#${id}-update`;
-    let data = $(formIdSelector).serialize();
-
-    $.ajax({
-      method: 'PUT',
-      url: `/api/events/${id}`,
-      data: data,
-      success: updateEventSuccess,
-      error: handleError
-    });
-  });
+  // $('#contentContainer').on('click', '.save-event', function(e) {
+  //   let id= $(this).closest('.event').data('event-id');
+  //   let formIdSelector = `#${id}-update`;
+  //   let data = $(formIdSelector).serialize();
+  //
+  //   $.ajax({
+  //     method: 'PUT',
+  //     url: `/api/events/${id}`,
+  //     data: data,
+  //     success: updateEventSuccess,
+  //     error: handleError
+  //   });
+  // });
 
   $("#closeModal").on("click", function(e){
     //no prevent default - want to keep
     //default form reset behavior w/o passing form ID
     $("#eventsModal").modal('hide');
   });
+
 });
   // $("#addEvent").on("click")
 
 function loadHome(){
 
   let pageHeaderContent = `Events`;
-  $("#pageHeader").empty().html(pageHeaderContent);
+  setPageHeader(pageHeaderContent);
 
   //all events
-  let contentHeaderContent = `<button id="eventAdd" class="btn btn-warning">Add Event</button>`;
-  $("#contentHeader").empty().html(contentHeaderContent);
+  let contentHeaderContent = `<button id="eventAdd" class="btn btn-primary">Add Event</button>`;
+  setContentHeader(contentHeaderContent);
 
   $.ajax({
     method: 'GET',
@@ -109,16 +144,15 @@ function loadHome(){
 
 function loadAbout(){
   let pageHeaderContent = `About`;
-  $("#pageHeader").empty().html(pageHeaderContent);
-
-  $("#contentHeader").empty();
-
+  setPageHeader(pageHeaderContent);
+  setContentHeader();
 
   let contentContainerContent = `
-  <h5>The Free Pizza Now Story</h5>
-  <h4><strong>Free Pizza Now</strong> is the brainchild of one <span style="font-size: 18px;">Mr. James Silvester</span>,
-  a man with an unquenchable desire for 3 things: <span style="font-weight: bold; color: red;">Free stuff, Pizza, and Immediacy</span>.</h4>
-  <img src="images/james.jpg" class="aboutImage pull-right">
+  <div class="col-xs-12 greyBack">
+  <h3>The Free Pizza Now Story</h2>
+  <p class="large"><strong>Free Pizza Now</strong> was the brainchild of one,
+  a man with an unquenchable desire for 3 things: <span class="bigRed">Free stuff, Pizza, and Immediacy</span>.</p>
+  <span class="imgCaption pull-right"><img src="../images/james.jpg" class="aboutImage"><br />Mr. James Silvester - Pizza Maven</span>
   <blockquote>
     I was sitting at my shared workspace table one day, overwhelmed by hunger. I couldn't concentrate. I felt dizzy.
     My vision blurred. I swore, as I tried to focus on the presentation, that I must be seeing things. (No one's beard
@@ -140,107 +174,108 @@ function loadAbout(){
 
     What could I do? I had to come up with a plan. A plan for free pizza. And I was literally starving. so this had to happen fast.
     In that moment, my needs now clearly understood, it hit me: what I needed was: FREE PIZZA NOW!
+    (Last Words Ever Spoken by James Silvester)
   </blockquote>
-  <p>While we would love to tell you that our brilliant and inspirational founder, James (AKA JayBird) Silvester, was able to somehow
+  <p class="large">While we would love to tell you that our brilliant and inspirational founder, James (AKA JayBird) Silvester, was able to somehow
   manufacture free pizza from thin air, the truth is it took many many months of tireless labor, daring risks, and hungry late nights
-  in front of his Macbook developing what we all now know as 2017's Killer App. James, of course, made  asuccessful exit from Free
+  in front of his Macbook developing what we all now know as 2017's Killer App. James, of course, made  a successful exit from Free
   Pizza Now, his vision, drive, and yes, his hunger, finally paying off to the tune of $10 billion dollars when Free Pizza Now was
-  bought by a joint conglomerate of United Nations Member Nations. The company and the app are now well on their way to solving world
-  hunger by connecting famine and poverty stricken populations across the world with FREE PIZZA.........NOW!!!!!!
-  `;
-  $("#contentContainer").empty().html(contentContainerContent);
+  bought by a joint conglomerate of United Nations Member Nations. While James suffered a tragic, painful, and untimely death just one
+  month after the company's purchase (an investigation is still on-going), the company and the app are now well on their way to solving world
+  hunger by connecting famine and poverty stricken populations across the world with FREE PIZZA.........NOW!!!!!!</p>
+  </div>`;
+
+  setContent(contentContainerContent);
 
 }
 
 function loadSignUp(){
-  $("#contentHeader").empty();
-
   let pageHeaderContent = `Sign Up for FREE PIZZA!!!!!`;
+  setPageHeader(pageHeaderContent);
+
+  setContentHeader();
+
+  setContent();
+}
+
+function setPageHeader(pageHeaderContent){
+  if (!pageHeaderContent){pageHeaderContent=""};
   $("#pageHeader").empty().html(pageHeaderContent);
 }
-//
-// });
+
+function setContentHeader(contentHeaderContent){
+  if (!contentHeaderContent){contentHeaderContent=""};
+  $("#contentHeader").empty().html(contentHeaderContent);
+}
+
+function setContent(content){
+  if (!content){content=""};
+  $("#contentContainer").empty().html(content);
+}
+
+function appendContent(content){
+  if (content){
+    $("#contentContainer").append(content);
+  }
+}
+
 function resetEventForm(){
   $("#closeModal").trigger("click");
 }
 
-function renderEvent(event) {
-  console.log(event);
-  let eventHtml = (`
-    <div class="event" id="${event._id}" data-event-id="${event._id}">
-    <form id="${event._id}-update" action="#" onsubmit="return false" method="PUT" class="event-update-form" name="${event._id}-update">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-          <div class="panel-body">
-          <!-- begin event internal row -->
-            <div class='row'>
-              <div class="col-md-3 col-xs-12 thumbnail event-art">
-                <span class="eventImage"><img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage"></span>
-              </div>
-              <div class="col-md-9 col-xs-12">
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Event Name:</h4>
-                    <span id="${event._id}-name" class='eventData'>${event.name}</span>
-                    <span id="${event._id}-name-input-span" class='eventInput'>
-                      <input id="${event._id}-name-input" type="text" name="name" value="${event.name}" size="${event.name.length}" required>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Date and Time:</h4>
-                    <span id="${event._id}-dateAndTime" class='eventData'>${event.dateAndTime}</span>
-                    <span id="${event._id}-dateAndTime-input-span" class='eventInput'>
-                      <input id="${event._id}-dateAndTime-input" type="text" name="dateAndTime" size="${event.dateAndTime.length}" value="${event.dateAndTime}" required>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Venue:</h4>
-                    <span id="${event._id}-venue" class='eventData'>${event.venue.name}</span>
-                    <span id="${event._id}-venue-input-span" class='eventInput'>
-                      <input id="${event._id}-venue-input" type="text" name="venue"  size="${event.venue.name.length}" value="${event.venue.name}" required>
-                    </span>
-                  </li>
+function formatDateAndTime(dateAndTime){
+  return `<strong>${dateAndTime}</strong>`;
+}
 
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Address:</h4>
-                    <span id="${event._id}-address" class='eventData'>${event.venue.address}</span>
-                    <span id="${event._id}-address-input-span" class='eventInput'>
-                      <input id="${event._id}-address-input" type="text" name="address"  size="${event.venue.address.length}" value="${event.venue.address}" required>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Description:</h4>
-                    <span id="${event._id}-desc" class='eventData'>${event.description}</span>
-                    <span id="${event._id}-desc-input-span" class='eventInput'>
-                      <textarea id="${event._id}-desc-input" name="description" cols="40" rows="5" required>${event.description}</textarea>
-                    </span>
-                  </li>
-                  <li class="list-group-item eventInput">
-                    <h4 class='inline-header'>Image:</h4>
-                    <span id="${event._id}-image-input-span" class='eventInput'>
-                      <input id="${event._id}-image-input" type="text" name="image"  size="50" value="${event.image}" required>
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- end of event internal row -->
-            <div class='row'>
-              <div class='panel-footer'>
-                <button class='btn btn-primary del-event pull-right'>Delete Event</button>
-                <button class='btn btn-primary edit-event pull-right'>Edit Event</button>
-                <button class='btn btn-primary save-event pull-right'>Save Changes</button>
-              </div>
-            </div>
+function formatVenue(venue){
+  return `<strong><a href="#">${venue}</a></strong>`;
+}
+
+function formatAddress(address){
+  return `${address} <a href="#">(map)</a>`;
+}
+
+function formatName(name){
+  let formattedName = name.substring(0,51);
+  if (name.length > 50){
+    formattedName = formattedName + '...';
+  }
+  return formattedName;
+}
+
+function renderEvent(event) {
+  let formattedDateAndTime = formatDateAndTime(event.dateAndTime);
+  let formattedVenue = formatVenue(event.venue.name);
+  let formattedAddress = formatAddress(event.venue.address);
+  let formattedName = formatName(event.name);
+  let eventHtml =`<div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
+      <div class="panel-default panel">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="nameRevealWrap">
+              <span  id="${event._id}-name" data-select="${event.name}" title="${event.name}" class="nameReveal">${event.name}</span>
+            </span>
           </div>
         </div>
+        <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage img-fluid img-thumbail">
+        <div class="eventContent">
+          <div class="eventData bold">${event.name}</div>
+          <div id="${event._id}-dateAndTime" data-select="${event.dateAndTime}" class='eventData'>${formattedDateAndTime}</div>
+          <div id="${event._id}-venue" data-select="${event.venue.name}" class='eventData'>${formattedVenue}</div>
+          <div id="${event._id}-address" data-select="${event.venue.address}" class='eventData'>${formattedAddress}</div>
+          <div id="${event._id}-desc" class='eventData eventDesc'>${event.description}</div>
+        </div>
+        <div class='panel-footer'>
+         <button class='btn btn-primary del-event pull-right'>Delete Event</button>
+         <button class='btn btn-primary edit-event pull-right'>Edit Event</button>
+        </div>
       </div>
-      </form>
     </div>
 
     <!-- end one event -->
-  `);
-  $('#contentContainer').append(eventHtml);
+  `;
+
+  appendContent(eventHtml);
 };
 
 function renderEvents(eventsList){
@@ -250,57 +285,31 @@ function renderEvents(eventsList){
 }
 
 function handleSuccessGet(eventsList){
-  console.log(eventsList);
+  setContent();
   renderEvents(eventsList);
+
 }
 
 function updateEventSuccess(event){
-
   let selectorId = `#${event._id}`,
-  selectorIdEventInput = `${selectorId} .eventInput`,
-  selectorIdEventData = `${selectorId} .eventData`,
-  selectorIdSaveEvent = `${selectorId} .save-event`,
-  selectorIdEditEvent = `${selectorId} .edit-event`,
-
-  selectorEventName = `${selectorId}-name`,
-  selectorDateAndTime = `${selectorId}-dateAndTime`,
+  selectorName = `${selectorId}-name`,
   selectorVenue = `${selectorId}-venue`,
-
   selectorAddress = `${selectorId}-address`,
+  selectorDateAndTime = `${selectorId}-dateAndTime`,                  d
   selectorDesc = `${selectorId}-desc`,
   selectorImage = `${selectorId}-image`;
 
-  selectorEventNameInput = `${selectorId}-name-input`,
-  selectorDateAndTimeInput = `${selectorId}-dateAndTime-input`,
-  selectorVenueInput = `${selectorId}-venue-input`,
-
-  selectorAddressInput = `${selectorId}-address-input`,
-  selectorDescInput = `${selectorId}-desc-input`,
-  selectorImageInput = `${selectorId}-image-input`;
-
-  eventName = $(selectorEventNameInput).val();
-  $(selectorEventName).html(eventName);
-
-  dateAndTime = $(selectorDateAndTime).val();
-  $(selectorDateAndTime).html(dateAndTime);
-
-  venue = $(selectorVenueInput).val();
-  $(selectorVenue).html(venue);
-
-  address = $(selectorAddressInput).val();
-  $(selectorAddress).html(address);
-
-  description = $(selectorDescInput).val();
-  $(selectorDesc).html(description);
-
-  image = $(selectorImageInput).val();
-  $(selectorImage).attr('src',image);
-
-  $(selectorIdEventInput).css("display","none");
-  $(selectorIdEventData).css("display","inline");
-  $(selectorIdSaveEvent).css("display","none");
-  $(selectorIdEditEvent).css("display","inline");
-
+  $(selectorName).html(formatName(event.name));
+  $(selectorName).attr("data-select",event.name);
+  $(selectorVenue).html(formatVenue(event.venue.name));
+  $(selectorVenue).attr("data-select",event.venue.name);
+  $(selectorDateAndTime).html(formatDateAndTime(event.dateAndTime));
+  $(selectorDateAndTime).attr("data-select",event.dateAndTime);
+  $(selectorAddress).html(formatAddress(event.venue.address));
+  $(selectorAddress).attr("data-select",event.venue.address);
+  $(selectorDesc).html(event.description);
+  $(selectorImage).attr("src",event.image);
+  resetEventForm();
 }
 
 // DELETE EVENT

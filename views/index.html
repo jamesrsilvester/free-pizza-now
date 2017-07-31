@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous">
 
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Slackey" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Combo:regular:latin-ext|Nunito" rel="stylesheet">
 
     <link rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -19,6 +19,7 @@
       crossorigin="anonymous">
 
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/warp.css">
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -30,124 +31,119 @@
   <body>
     <div class="jumbotron">
       <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <h1>Free Pizza Now</h1>
-        </div>
-      </div>
-    </div>
-    <section class="container">
-
-      <div class="row">
-        <div class="col-md-4">
-          <h2 id="pageHeader"></h2>
-        </div>
-        <div class="col-md-5 col-md-offset-3 pull-right">
-          <div class="navbar-header">
-            <a class="btn btn-warning" href="#" id="navHome">Home</a>
-            <!-- <a class="btn btn-warning" href="#" id="navEventsList">Events</a>
-            <a class="btn btn-warning" href="#" id="navVenues">Venues</a> -->
-            <a class="btn btn-warning" href="#" id="navAbout">About</a>
-            <a class="btn btn-warning" href="#" id="navSignUp">Sign Up</a>
-            <a class="btn btn-warning" href="#" id="navEventBrite">EventBrite Seed</a>
+        <div class="col-md-12">
+          <div id='warped'>
+            <span class='w0'> </span><span class='w1'> </span><span class='w2'>F</span><span class='w3'>r</span><span class='w4'>e</span><span class='w5'>e</span><span class='w6'> </span><span class='w7'>P</span><span class='w8'>i</span><span class='w9'>z</span><span class='w10'>z</span><span class='w11'>a</span><span class='w12'> </span><span class='w13'>N</span><span class='w14'>o</span><span class='w15'>w</span><span class='w16'>!</span>
           </div>
         </div>
       </div>
-
-      <!-- display messages -->
-      <!-- <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <div id="messageContainer"></div>
+    </div>
+    <!--- content container -->
+    <div id="pageContents" class="container-fluid">
+      <!-- header bar -->
+      <div class="row" name="header">
+        <div class="col-xs-12 col-md-6 pull-right" name="headerRight">
+          <div class="navbar pull-right">
+            <a class="btn btn-primary" href="#" id="navHome">Home</a>
+            <!-- <a class="btn btn-primary btn btn-primary-warning" href="#" id="navEventsList">Events</a>
+            <a class="btn btn-primary btn btn-primary-warning" href="#" id="navVenues">Venues</a> -->
+            <a class="btn btn-primary" href="#" id="navAbout">About</a>
+            <a class="btn btn-primary" href="#" id="navSignUp">Sign Up</a>
+            <a class="btn btn-primary" href="#" id="navEventBrite">EventBrite Seed</a>
+          </div>
         </div>
-      </div> -->
-      <!-- add event -->
-      <div class="row">
-          <div id="contentHeader" class="col-md-12"></div>
+        <!-- page header (Page titles)-->
+        <div class="col-xs-12 col-md-6" name="headerLeft">
+          <h2 id="pageHeader"></h2>
+          <!-- contentNeader: object buttons (Add) -->
+          <div id="contentHeader"></div>
+        </div>
       </div>
-
-      <!-- events -->
+      <!-- content -->
+      <div class="row align-items-start" id="contentContainer"></div>
+      <!-- padding for footer on scroll -->
+      <div id="bottomPad"></div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom container-fluid">
       <div class="row">
-        <div id="contentContainer" class="col-md-12"></div>
+        <div class="col-md-auto col-md-offset3" name="footerLeft">
+          <a
+            href="javascript:alert('FAIL:\nAin\'t nothin\' in life free!&#9785;');"
+            class="navbar-btn btn-danger btn pull-left"
+          >
+            <span class="glyphicon glyphicon-star"></span>
+            Click for a chance to win FREE PIZZA!
+          </a>
+         </div>
+         <div class="col-md-auto col-md-offset3 pull-right" name="footerRight">
+
+           <p class="navbar-text pull-right">
+             &copy; 2017 - Site Built By
+             <a href="https://github.com/jamesrsilvester">James Silvester</a> &amp;
+             <a href="https://github.com/calJersey">Some Dude</a>
+           </p>
+         </div>
       </div>
+    </div>
 
-    </section>
-    <div class="navbar navbar-default navbar-fixed-bottom">
-       <div class="container">
-
-        <a href="javascript:alert('FAIL:\nAin\'t nothin\' in life free!&#9785;');" class="navbar-btn btn-danger btn pull-left">
-        <span class="glyphicon glyphicon-star"></span>Click for a chance to win FREE PIZZA!</a>
-         <p class="navbar-text pull-right">
-           &copy; 2017 - Site Built By
-           <a href="https://github.com/jamesrsilvester">James Silvester</a> &amp;
-           <a href="https://github.com/calJersey">Some Dude</a>
-         </p>
-
-       </div>
-     </div>
-
-    <!-- begin songModal: this is not visible until you call .modal() on it -->
+    <!-- begin EventModal is not visible until you call .modal() on it -->
     <div class="modal fade" tabindex="-1" role="dialog" id="eventsModal">
-      <form name="eventAddForm" id="eventAddForm" method="POST" action="return false;">
+      <form name="eventAddForm" id="modalEventForm" method="POST" action="#">
+      <input type="hidden" id="modalEventId" value="0">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Create Event</h4>
+            <h4 class="modal-title" id="modalH4">Create Event</h4>
           </div>
           <div class="modal-body">
 
             <fieldset class='form-horizontal'>
               <!-- Event name -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="songName">Event Name</label>
-                <div class="col-md-4">
-                  <input id="name" name="name" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+                <label class="col-md-4 control-label" for="name">Event Name</label>
+                <input id="name" name="name" type="text" placeholder="required" class="form-control" required>
               </div>
               <!-- Event desc -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="description">Event Description</label>
-                <div class="col-md-4">
-                  <textarea name="description" id="description" class="form-control input-md" required></textarea>
-                </div>
+                <textarea name="description" cols="25" rows="5" id="description" class="form-control" required></textarea>
+
               </div>
               <!-- Event Date -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="events">Event Date &amp; Time</label>
-                <div class="col-md-4">
-                  <input id="dateAndTime" name="dateAndTime" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+                <input id="dateAndTime" name="dateAndTime" type="text" placeholder="required" class="form-control" required>
+
               </div>
               <!-- Event Venue -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="venue">Event Venue</label>
-                <div class="col-md-4">
-                  <input id="venue" name="venue" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+                <input id="venue" name="venue" type="text" placeholder="required" class="form-control" required>
+
               </div>
               <!-- Event Date -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="address">Event Address</label>
-                <div class="col-md-4">
-                  <input id="address" name="address" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+                <input id="address" name="address" type="text" placeholder="required" class="form-control" required>
+
               </div>
               <!-- Event Image -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="Image">Event Image</label>
-                <div class="col-md-4">
-                  <input id="image" name="image" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+                <input id="image" name="image"  type="text" placeholder="required" class="form-control" required>
+
               </div>
             </fieldset>
 
           </div>
           <div class="modal-footer">
-            <input type="reset" class="btn btn-default" id="closeModal" closeModel="" value="Close">
+            <input type="reset" class="btn btn-primary" id="closeModal" closeModel="" value="Close">
             <button type="submit" class="btn btn-primary" id="saveEvent">Add Event</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
-    </form>
+      </form>
     </div><!-- /.modal -->
 
 
