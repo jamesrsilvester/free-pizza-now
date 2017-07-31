@@ -20,5 +20,5 @@ With Free Pizza Now you can:
 * Bootstrap
 
 ## Authors
-* **Dan L????** -  [PurpleBooth](https://github.com/calJersey)
+* **Dan Lombardino** -  [PurpleBooth](https://github.com/calJersey)
 * **James S** - [PurpleBooth](https://github.com/jamesrsilvester)
