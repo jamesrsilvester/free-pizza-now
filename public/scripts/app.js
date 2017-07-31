@@ -171,11 +171,18 @@ function renderEvent(event) {
     <form id="${event._id}-update" action="#" onsubmit="return false" method="PUT"
       class="event-update-form" name="${event._id}-update">
 
-        <div class="panel panel-default">
+        <div class="panel-default panel">
           <div class="panel-heading">
             <div class="panel-title">
-              <span id="${event._id}-dateAndTime" class='eventData'>${event.dateAndTime}</span>
+              <span id="${event._id}-name" class='eventData'>${event.name}</span>
             </div>
+          </div>
+          <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage img-fluid img-thumbail">
+          <div class="eventContent">
+            <div id="${event._id}-dateAndTime" class='eventData'><strong>${event.dateAndTime}</strong></div>
+            <div id="${event._id}-venue" class='eventData'><strong><a href="#">${event.venue.name}</a></strong></div>
+            <div id="${event._id}-address" class='eventData'>${event.venue.address}</div>
+            <div id="${event._id}-desc" class='eventData'>${event.description}</div>
           </div>
         </div>
         <div class="panel panel-default">
