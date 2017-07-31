@@ -88,8 +88,8 @@
 
     <!-- begin EventModal is not visible until you call .modal() on it -->
     <div class="modal fade" tabindex="-1" role="dialog" id="eventsModal">
-      <form name="eventAddForm" id="modalEventForm" method="POST" action="return false;">
-      <input type="hidden" id="modalEventId" value="">
+      <form name="eventAddForm" id="modalEventForm" method="POST" action="#">
+      <input type="hidden" id="modalEventId" value="0">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -102,7 +102,7 @@
               <!-- Event name -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="name">Event Name</label>
-                  <input id="name" name="name" type="text" placeholder="required" class="form-control">
+                <input id="name" name="name" type="text" placeholder="required" class="form-control" required>
               </div>
               <!-- Event desc -->
               <div class="form-group">
@@ -113,29 +113,25 @@
               <!-- Event Date -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="events">Event Date &amp; Time</label>
-
-                  <input id="dateAndTime" size="65" name="dateAndTime" type="text" placeholder="required" class="form-control" required>
+                <input id="dateAndTime" name="dateAndTime" type="text" placeholder="required" class="form-control" required>
 
               </div>
               <!-- Event Venue -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="venue">Event Venue</label>
-
-                  <input id="venue" name="venue" size="65" style="size:75px;" type="text" placeholder="required" class="form-control" required>
+                <input id="venue" name="venue" type="text" placeholder="required" class="form-control" required>
 
               </div>
               <!-- Event Date -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="address">Event Address</label>
-
-                  <input id="address" name="address" size="65"  type="text" placeholder="required" class="form-control" required>
+                <input id="address" name="address" type="text" placeholder="required" class="form-control" required>
 
               </div>
               <!-- Event Image -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="Image">Event Image</label>
-
-                  <input id="image" name="image" size="65"  type="text" placeholder="required" class="form-control" required>
+                <input id="image" name="image"  type="text" placeholder="required" class="form-control" required>
 
               </div>
             </fieldset>

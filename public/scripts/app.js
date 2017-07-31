@@ -3,7 +3,7 @@ console.log("JS is Linked");
 $(document).ready(function() {
 
   //renderEvents(sampleEvents);
-  let eventAddForm = $('#eventAddForm');
+  let modalEventForm = $('#modalEventForm');
   let closeModal = $('#closeModal');
   let currPage = 'Home';
   let numArticles = 0;
@@ -27,6 +27,8 @@ $(document).ready(function() {
   });
   // Add Event Button Clicked
   $('#eventAdd').on('click', function(e) {
+      $("#saveEvent").html("Add Event");
+      $("#modalH4").html("Create Event");
       $('#eventsModal').modal();
     });
 
@@ -35,29 +37,36 @@ $(document).ready(function() {
     getEventBriteEvents();
   });
 
-  $('a.moreLink').on('mouseover', function(event){
-    event.preventDefault();
-
-  }
-
-  );
   //Save New Event
-  eventAddForm.on('submit', function(e) {
+  modalEventForm.on('submit', function(e) {
     e.preventDefault();
+
+    let eventId = $("#modalEventId").val();
     let formData = $(this).serialize();
-    //POST to node
-    $.post('/api/events', formData, function(event) {
-      console.log(event);
-      renderEvent(event);  //render the server's response
-      resetEventForm();
-    });
+console.log($("#modalEventId").val());
+    //put request if an id is present
+    if (eventId){
+      $.ajax({
+        method: 'PUT',
+        url: `/api/events/${eventId}`,
+        data: formData,
+        success: updateEventSuccess,
+        error: handleError
+      });
+    } else {
+
+      //POST to node
+      $.post('/api/events', formData, function(event) {
+        console.log(event);
+        renderEvent(event);  //render the server's response
+        resetEventForm();
+      });
+    }
   });
 
   $('#contentContainer').on('click', '.edit-event', function(e){
-
     e.preventDefault();
 
-    $("#modalEventId").val()
     let id= $(this).closest('.event').data('event-id'),
     selectorId = `#${id}`,
     selectorIdEventName = `${selectorId}-name`,
@@ -66,10 +75,10 @@ $(document).ready(function() {
     selectorIdEventAddress = `${selectorId}-address`,
     selectorIdEventDesc = `${selectorId}-desc`,
     selectorIdEventImage = `${selectorId}-image`
-console.log($(selectorIdEventDesc).html());
-    $("#modalEventForm input[name=modalEventId]").val(id);
+
+    $("#modalEventId").val(id);
     $("#modalEventForm input[name=name]").val($(selectorIdEventName).attr("data-select"));
-    $("#description ").val($(selectorIdEventDesc).html());
+    $("#description").val($(selectorIdEventDesc).html());
     $("#modalEventForm input[name=dateAndTime]").val($(selectorIdEventDateAndTime).attr("data-select"));
     $("#modalEventForm input[name=venue").val($(selectorIdEventVenue).attr("data-select"));
     $("#modalEventForm input[name=address]").val($(selectorIdEventAddress).attr("data-select"));
@@ -85,19 +94,19 @@ console.log($(selectorIdEventDesc).html());
       handleDeleteEventClick(id);
   });
 
-  $('#contentContainer').on('click', '.save-event', function(e) {
-    let id= $(this).closest('.event').data('event-id');
-    let formIdSelector = `#${id}-update`;
-    let data = $(formIdSelector).serialize();
-
-    $.ajax({
-      method: 'PUT',
-      url: `/api/events/${id}`,
-      data: data,
-      success: updateEventSuccess,
-      error: handleError
-    });
-  });
+  // $('#contentContainer').on('click', '.save-event', function(e) {
+  //   let id= $(this).closest('.event').data('event-id');
+  //   let formIdSelector = `#${id}-update`;
+  //   let data = $(formIdSelector).serialize();
+  //
+  //   $.ajax({
+  //     method: 'PUT',
+  //     url: `/api/events/${id}`,
+  //     data: data,
+  //     success: updateEventSuccess,
+  //     error: handleError
+  //   });
+  // });
 
   $("#closeModal").on("click", function(e){
     //no prevent default - want to keep
@@ -201,10 +210,23 @@ function resetEventForm(){
   $("#closeModal").trigger("click");
 }
 
-function renderEvent(event) {
+function formatDateAndTime(dateAndTime){
+  return `<strong>${dateAndTime}</strong>`;
+}
 
-  let eventHtml = (`
-    <div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
+function formatVenue(venue){
+  return `<strong><a href="#">${venue}</a></strong>`;
+}
+
+function formatAddress(address){
+  return `${address} <a href="#">(map)</a>`;
+}
+
+function renderEvent(event) {
+  let formattedDateAndTime = formatDateAndTime(event.dateAndTime);
+  let formattedVenue = formatVenue(event.venue.name);
+  let formattedAddress = formatAddress(event.venue.address);
+  let eventHtml =`<div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
       <div class="panel-default panel">
         <div class="panel-heading">
           <div class="panel-title">
@@ -213,9 +235,9 @@ function renderEvent(event) {
         </div>
         <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage img-fluid img-thumbail">
         <div class="eventContent">
-          <div id="${event._id}-dateAndTime" data-select="${event.dateAndTime}" class='eventData'><strong>${event.dateAndTime}</strong></div>
-          <div id="${event._id}-venue" data-select="${event.venue.name}" class='eventData'><strong><a href="#">${event.venue.name}</a></strong></div>
-          <div id="${event._id}-address" data-select="${event.venue.address}" class='eventData'>${event.venue.address} <a href="#">(map)</a></div>
+          <div id="${event._id}-dateAndTime" data-select="${event.dateAndTime}" class='eventData'>${formattedDateAndTime}</div>
+          <div id="${event._id}-venue" data-select="${event.venue.name}" class='eventData'>${formattedVenue}</div>
+          <div id="${event._id}-address" data-select="${event.venue.address}" class='eventData'>${formattedAddress}</div>
           <div id="${event._id}-desc" class='eventData eventDesc'>${event.description}</div>
         </div>
         <div class='panel-footer'>
@@ -226,7 +248,7 @@ function renderEvent(event) {
     </div>
 
     <!-- end one event -->
-  `);
+  `;
 
   appendContent(eventHtml);
 };
@@ -244,52 +266,25 @@ function handleSuccessGet(eventsList){
 }
 
 function updateEventSuccess(event){
-
   let selectorId = `#${event._id}`,
-  selectorIdEventInput = `${selectorId} .eventInput`,
-  selectorIdEventData = `${selectorId} .eventData`,
-  selectorIdSaveEvent = `${selectorId} .save-event`,
-  selectorIdEditEvent = `${selectorId} .edit-event`,
-
-  selectorEventName = `${selectorId}-name`,
-  selectorDateAndTime = `${selectorId}-dateAndTime`,
+  selectorName = `${selectorId}-name`,
   selectorVenue = `${selectorId}-venue`,
-
   selectorAddress = `${selectorId}-address`,
+  selectorDateAndTime = `${selectorId}-dateAndTime`,                  d
   selectorDesc = `${selectorId}-desc`,
   selectorImage = `${selectorId}-image`;
 
-  selectorEventNameInput = `${selectorId}-name-input`,
-  selectorDateAndTimeInput = `${selectorId}-dateAndTime-input`,
-  selectorVenueInput = `${selectorId}-venue-input`,
-
-  selectorAddressInput = `${selectorId}-address-input`,
-  selectorDescInput = `${selectorId}-desc-input`,
-  selectorImageInput = `${selectorId}-image-input`;
-
-  eventName = $(selectorEventNameInput).val();
-  $(selectorEventName).html(eventName);
-
-  dateAndTime = $(selectorDateAndTime).val();
-  $(selectorDateAndTime).html(dateAndTime);
-
-  venue = $(selectorVenueInput).val();
-  $(selectorVenue).html(venue);
-
-  address = $(selectorAddressInput).val();
-  $(selectorAddress).html(address);
-
-  description = $(selectorDescInput).val();
-  $(selectorDesc).html(description);
-
-  image = $(selectorImageInput).val();
-  $(selectorImage).attr('src',image);
-
-  $(selectorIdEventInput).css("display","none");
-  $(selectorIdEventData).css("display","inline");
-  $(selectorIdSaveEvent).css("display","none");
-  $(selectorIdEditEvent).css("display","inline");
-
+  $(selectorName).html(event.name);
+  $(selectorName).attr("data-select",event.name);
+  $(selectorVenue).html(formatVenue(event.venue.name));
+  $(selectorVenue).attr("data-select",event.venue.name);
+  $(selectorDateAndTime).html(formatDateAndTime(event.dateAndTime));
+  $(selectorDateAndTime).attr("data-select",event.dateAndTime);
+  $(selectorAddress).html(formatAddress(event.venue.address));
+  $(selectorAddress).attr("data-select",event.venue.address);
+  $(selectorDesc).html(event.description);
+  $(selectorImage).attr("src",event.image);
+  resetEventForm();
 }
 
 // DELETE EVENT

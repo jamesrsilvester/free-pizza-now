@@ -69,7 +69,7 @@ dbody {
 }
 
 .eventImage {
-  border: 1px solid #ec971e;
+
   max-width: 100%;
   width: 100%;
   height: auto;
@@ -82,7 +82,7 @@ dbody {
 }
 
 .eventContent  {
-  border:0px;
+  border-top: 2px solid #ec971e;
   padding:4px;
   position: relative;
   max-height: 200px;
