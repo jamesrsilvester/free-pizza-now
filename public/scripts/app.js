@@ -192,7 +192,9 @@ function loadAbout(){
 function loadSignUp(){
   let pageHeaderContent = `Sign Up for FREE PIZZA!!!!!`;
   setPageHeader(pageHeaderContent);
+
   setContentHeader();
+
   setContent();
 }
 
@@ -233,19 +235,31 @@ function formatAddress(address){
   return `${address} <a href="#">(map)</a>`;
 }
 
+function formatName(name){
+  let formattedName = name.substring(0,51);
+  if (name.length > 50){
+    formattedName = formattedName + '...';
+  }
+  return formattedName;
+}
+
 function renderEvent(event) {
   let formattedDateAndTime = formatDateAndTime(event.dateAndTime);
   let formattedVenue = formatVenue(event.venue.name);
   let formattedAddress = formatAddress(event.venue.address);
+  let formattedName = formatName(event.name);
   let eventHtml =`<div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
       <div class="panel-default panel">
         <div class="panel-heading">
           <div class="panel-title">
-            <span id="${event._id}-name" data-select="${event.name}" class='eventData'>${event.name}</span>
+            <span class="nameRevealWrap">
+              <span  id="${event._id}-name" data-select="${event.name}" title="${event.name}" class="nameReveal">${event.name}</span>
+            </span>
           </div>
         </div>
         <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage img-fluid img-thumbail">
         <div class="eventContent">
+          <div class="eventData bold">${event.name}</div>
           <div id="${event._id}-dateAndTime" data-select="${event.dateAndTime}" class='eventData'>${formattedDateAndTime}</div>
           <div id="${event._id}-venue" data-select="${event.venue.name}" class='eventData'>${formattedVenue}</div>
           <div id="${event._id}-address" data-select="${event.venue.address}" class='eventData'>${formattedAddress}</div>
@@ -285,7 +299,7 @@ function updateEventSuccess(event){
   selectorDesc = `${selectorId}-desc`,
   selectorImage = `${selectorId}-image`;
 
-  $(selectorName).html(event.name);
+  $(selectorName).html(formatName(event.name));
   $(selectorName).attr("data-select",event.name);
   $(selectorVenue).html(formatVenue(event.venue.name));
   $(selectorVenue).attr("data-select",event.venue.name);

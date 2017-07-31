@@ -7,9 +7,69 @@ p.large {
   font-size: 20px;
 }
 
+h1 {
+  font-family: Combo, sans-serif;
+  font-size: 80px;
+  font-weight: 700;
+  color: #2e6da3
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  font-family: Combo, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: #2e6da3
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  font-family: Combo, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #2e6da3
+  padding: 0;
+  margin: 0;
+}
+
+span.nameRevealWrap {
+  white-space: nowrap;
+  height: 20px;
+  max-height:30px;
+  background-color: transparent;
+  background-image: none;
+  clear: both;
+  display:block;
+  border: 0px;
+}
+
+span.nameReveal {
+  width:100%;
+  float:left;
+  overflow-x: hidden;
+  display: inline;
+  height: 20px;
+  max-height: 30px;
+  background-color: transparent;
+  background-image: none;
+  border: 0px;
+}
+
+.clear{
+  clear:both;
+  background-color: transparent;
+  background-image: none;
+}
+
 .aboutImage {
   max-width: 250px;
   border: 2px solid #ec971e;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .bigRed {
@@ -43,17 +103,23 @@ p.large {
   height: 200px;
   background-color: #fff;
   padding-top: 7px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .jumbotron .container {
-  height: 100px;
+  height: 200px;
 }
 
 .row {
   padding: 2px;
   margin: 2px;
 }
+
+/*.panel-default, .panel {
+
+  max-height:500px;
+  height: 500px;
+}*/
 
 .panel, .modal-header {
   border-bottom:2px solid #ec971e;
@@ -62,19 +128,23 @@ p.large {
   border-top: 0px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  background-color: #ec971e;
+  background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
+  background-repeat: repeat-x;
 }
 
 .panel-title {
   background-color: transparent;
   color: #fff;
+  background: transparent;
 }
 
 .panel-default>.panel-heading, .modal-header  {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  /*border-top-left-radius: 6px;
+  border-top-right-radius: 6px;*/
   background-image:none;
   background-color: #ec971e;
-  background-image: linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
+  background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
   background-repeat: repeat-x;
   color: #fff;
   border-bottom:0px;
@@ -83,14 +153,14 @@ p.large {
 .panel-footer, .modal-footer {
   width: 100%;
   height: 60px;
+  border:0px;
   background-image:none;
-  background-color: #ec971e;
-  background-image: linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
+  background-color: transparent;
+  background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
   background-repeat: repeat-x;
 }
 
 .eventImage {
-
   max-width: 100%;
   width: 100%;
   height: auto;
@@ -121,51 +191,22 @@ p.large {
 }
 
 .greyBack {
-  background-color: #f0f0f0;
+  background-color: #e0e0e0;
   border-radius: 6px;
 }
-
-#pageContents{
-  height: 100%;
-}
-
-#bottomPad{
-  height: 80px;
-  width: 100%;
-}
-
-h1 {
-  font-family: Combo, sans-serif;
-  font-size: 80px;
-  font-weight: 700;
-  padding: 0;
-  margin: 0;
-}
-
-h2 {
-  font-family: Combo, sans-serif;
-  font-size: 64px;
-  font-weight: 700;
-  padding: 0;
-  margin: 0;
-}
-
-h3 {
-  font-family: Combo, sans-serif;
-  font-size: 40px;
-  font-weight: 700;
-  padding: 0;
-  margin: 0;
-}
-
 .navbar {
-  background-color: #fff;
   min-height: 0px;
   padding: 7px 7px 7px 7px;
   border-radius: 6px;
   margin-top: 7px;
-  margin-right: 7px;
+  margin-right: 0px;
   right:0px;
+}
+.navbar-default{
+  background-image: none;
+}
+.navbar-fixed-bottom {
+  background-color: #e0e0e0;
 }
 
 .div  {border: 1px solid #000;}
@@ -186,6 +227,16 @@ h3 {
 .hidden {
   visibility: hidden;
   position: absolute;
+}
+
+
+#pageContents{
+  height: 100%;
+}
+
+#bottomPad{
+  height: 80px;
+  width: 100%;
 }
 
 #eventAdd {
