@@ -25,6 +25,14 @@ $(document).ready(function() {
       loadAbout();
     }
   });
+
+  $("#navSignUp").on("click", function(e){
+    e.preventDefault();
+    if (currPage !== 'SignUp'){
+      currPage = 'SignUp';
+      loadSignUp();
+    }
+  });
   // Add Event Button Clicked
   $('#eventAdd').on('click', function(e) {
       $("#saveEvent").html("Add Event");
@@ -140,10 +148,11 @@ function loadAbout(){
   setContentHeader();
 
   let contentContainerContent = `
-  <h5>The Free Pizza Now Story</h5>
-  <h4><strong>Free Pizza Now</strong> is the brainchild of one <span style="font-size: 18px;">Mr. James Silvester</span>,
-  a man with an unquenchable desire for 3 things: <span style="font-weight: bold; color: red;">Free stuff, Pizza, and Immediacy</span>.</h4>
-  <img src="images/james.jpg" class="aboutImage pull-right">
+  <div class="col-xs-12 greyBack">
+  <h3>The Free Pizza Now Story</h2>
+  <p class="large"><strong>Free Pizza Now</strong> was the brainchild of one,
+  a man with an unquenchable desire for 3 things: <span class="bigRed">Free stuff, Pizza, and Immediacy</span>.</p>
+  <span class="imgCaption pull-right"><img src="../images/james.jpg" class="aboutImage"><br />Mr. James Silvester - Pizza Maven</span>
   <blockquote>
     I was sitting at my shared workspace table one day, overwhelmed by hunger. I couldn't concentrate. I felt dizzy.
     My vision blurred. I swore, as I tried to focus on the presentation, that I must be seeing things. (No one's beard
@@ -165,14 +174,16 @@ function loadAbout(){
 
     What could I do? I had to come up with a plan. A plan for free pizza. And I was literally starving. so this had to happen fast.
     In that moment, my needs now clearly understood, it hit me: what I needed was: FREE PIZZA NOW!
+    (Last Words Ever Spoken by James Silvester)
   </blockquote>
-  <p>While we would love to tell you that our brilliant and inspirational founder, James (AKA JayBird) Silvester, was able to somehow
+  <p class="large">While we would love to tell you that our brilliant and inspirational founder, James (AKA JayBird) Silvester, was able to somehow
   manufacture free pizza from thin air, the truth is it took many many months of tireless labor, daring risks, and hungry late nights
-  in front of his Macbook developing what we all now know as 2017's Killer App. James, of course, made  asuccessful exit from Free
+  in front of his Macbook developing what we all now know as 2017's Killer App. James, of course, made  a successful exit from Free
   Pizza Now, his vision, drive, and yes, his hunger, finally paying off to the tune of $10 billion dollars when Free Pizza Now was
-  bought by a joint conglomerate of United Nations Member Nations. The company and the app are now well on their way to solving world
-  hunger by connecting famine and poverty stricken populations across the world with FREE PIZZA.........NOW!!!!!!
-  `;
+  bought by a joint conglomerate of United Nations Member Nations. While James suffered a tragic, painful, and untimely death just one
+  month after the company's purchase (an investigation is still on-going), the company and the app are now well on their way to solving world
+  hunger by connecting famine and poverty stricken populations across the world with FREE PIZZA.........NOW!!!!!!</p>
+  </div>`;
 
   setContent(contentContainerContent);
 

@@ -1,7 +1,32 @@
-dbody {
+body {
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
 }
+
+p.large {
+  font-size: 20px;
+}
+
+.aboutImage {
+  max-width: 250px;
+  border: 2px solid #ec971e;
+}
+
+.bigRed {
+  font-weight: bold;
+  color: #f00;
+}
+
+.imgCaption {
+  align:center;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+  border: 2px solid #ec971e;
+  padding: 2px;
+  margin: 5px;
+}
+
 .col-xs-1{border:1px solid #000;}
 
 .btn {
@@ -23,10 +48,6 @@ dbody {
 
 .jumbotron .container {
   height: 100px;
-}
-
-.aboutImage {
-  border: 2px solid #ec971e;
 }
 
 .row {
@@ -99,12 +120,17 @@ dbody {
   width: 50%;
 }
 
+.greyBack {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+}
+
 #pageContents{
   height: 100%;
 }
 
 #bottomPad{
-  height: 50px;
+  height: 80px;
   width: 100%;
 }
 
