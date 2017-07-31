@@ -42,6 +42,7 @@ $(document).ready(function() {
 
   $('#navEventBrite').on('click', function(e) {
     event.preventDefault();
+    getLocation();
     getEventBriteEvents();
   });
 
@@ -361,3 +362,14 @@ function eventSuccess(json) {
     error: handleError
   });
 }
+
+var currentLocation;
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+}
+function showPosition(position) {
+    console.log("Current Location is " + position.coords.latitude + ", " + position.coords.longitude)
+}
+};
