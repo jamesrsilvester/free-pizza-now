@@ -67,7 +67,15 @@ span.nameReveal {
   max-width: 250px;
   border: 2px solid #ec971e;
 }
-
+.regImage {
+  min-width:350px;
+  max-width: 850px;
+  border: 2px solid #ec971e;
+  align: center;
+}
+.tall{
+  min-height: 500px;
+}
 .bold {
   font-weight: bold;
 }

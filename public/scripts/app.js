@@ -192,10 +192,14 @@ function loadAbout(){
 function loadSignUp(){
   let pageHeaderContent = `Sign Up for FREE PIZZA!!!!!`;
   setPageHeader(pageHeaderContent);
-
   setContentHeader();
 
-  setContent();
+  let contentContainerContent = `  <div class="col-md-4 greyBack">
+  <span class="imgCaption"><img src="../images/reg_form.png"  class="regImage"></span></div>
+<div class="col-md-4 greyBack"><span class="imgCaption"><img src="../images/IMG_3953.jpg" class="regImage"><br /> James Silvester & Some Random Dude</span>
+  </div>`
+
+  setContent(contentContainerContent);
 }
 
 function setPageHeader(pageHeaderContent){
@@ -248,7 +252,7 @@ function renderEvent(event) {
   let formattedVenue = formatVenue(event.venue.name);
   let formattedAddress = formatAddress(event.venue.address);
   let formattedName = formatName(event.name);
-  let eventHtml =`<div class="event col-lg-4 col-md-4 col-xs-12 col-sm-6 pull-left" id="${event._id}" data-event-id="${event._id}">
+  let eventHtml =`<div class="event col-lg-4 col-md-4 col-xs-12 col-sm-6 " id="${event._id}" data-event-id="${event._id}">
       <div class="panel-default panel">
         <div class="panel-heading">
           <div class="panel-title">
