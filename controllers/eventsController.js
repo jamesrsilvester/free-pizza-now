@@ -99,7 +99,8 @@ function update(req, res) {
 };
 
 function importEventBrite(req, res){
-  eventsAdded = [];
+  let eventsAdded = [];
+  let eventsToPreserve = ['597f5deac3f41a59c72582e5','597f5deac3f41a59c72582e3','597f5deac3f41a59c72582e1','597f5deac3f41a59c72582de'];
 
   req.body.events.forEach(function(event,index){
     if (index <= 12){
@@ -144,18 +145,27 @@ function importEventBrite(req, res){
         image: event.logo.url
       }
 
-      db.Event.create(newEvent, function (err, event) {
-        if (err){
-          eventsAdded.push({error: err.errorMessage});
-        }
-        else {
-          eventsAdded.push(newEvent);
-        }
-      });
+      eventsAdded.push(newEvent);
+
     }
   });
 
-  res.json(eventsAdded);
+  db.Event.find({ "groups": { "$nin": eventsToPreserve } }).exec(function (err, foundEvents){
+    console.log(JSON.stringify(foundEvents));
+    let eventsToDelete = [];
+    let thisEvent = {};
+    foundEvents.forEach(function(item,index){
+      thisEvent = {"_id":item._id}
+      eventsToDelete.push(thisEvent);
+    });
+    if (err){res.status(500).json({error:err.message});};
+    db.Event.remove(foundEvents, function(err, events){
+      db.Event.create(eventsAdded, function(err, events){
+        if (err){res.status(500).json({error:err.message});};
+        res.json(events);
+      });
+    });
+  });
 }
 
 module.exports = {

@@ -248,7 +248,7 @@ function renderEvent(event) {
   let formattedVenue = formatVenue(event.venue.name);
   let formattedAddress = formatAddress(event.venue.address);
   let formattedName = formatName(event.name);
-  let eventHtml =`<div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
+  let eventHtml =`<div class="event col-lg-4 col-md-4 col-xs-12 col-sm-6 pull-left" id="${event._id}" data-event-id="${event._id}">
       <div class="panel-default panel">
         <div class="panel-heading">
           <div class="panel-title">
@@ -335,9 +335,14 @@ function handleError(err){
 }
 
 // EVENTS
-let eventbriteAPI = "https://www.eventbriteapi.com/v3/events/search/?q=pizza+OR+refreshments&sort_by=distance&location.within=5mi&location.latitude=37.7902457&location.longitude=-122.40048120000002&price=free&start_date.keyword=today&token=QZAGTH35SAKMJ2DFF3DX"
+let eventbriteAPI = "https://www.eventbriteapi.com/v3/events/search/?q=pizza+OR+refreshments&sort_by=date&location.within=5mi&location.latitude=37.7902457&location.longitude=-122.40048120000002&price=free&start_date.keyword=this_week&token=QZAGTH35SAKMJ2DFF3DX";
 
 function getEventBriteEvents(){
+  let pageHeaderContent = `Import Events`;
+  setPageHeader(pageHeaderContent);
+
+  setContentHeader();
+
   $.ajax({
     method: "GET",
     url: eventbriteAPI,
