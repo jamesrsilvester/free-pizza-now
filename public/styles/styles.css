@@ -34,7 +34,14 @@ dbody {
   margin: 2px;
 }
 
-.panel{border:0px;}
+.panel{
+  border-bottom:2px solid #ec971e;
+  border-left:2px solid #ec971e;
+  border-right:2px solid #ec971e;
+  border-top: 0px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
 
 .panel-title {
   background-color: transparent;
@@ -65,8 +72,26 @@ dbody {
 }
 
 .eventContent{
-  border:2px solid #ec971e;
-  padding:2px;
+  border:0px;
+  padding:4px;
+  position: relative;
+  max-height: 200px;
+  height: 200px;
+  overflow-y: scroll;
+
+}
+
+.eventDesc {
+  height:
+}
+
+#pageContents{
+  height: 100%;
+}
+
+#bottomPad{
+  height: 50px;
+  width: 100%;
 }
 
 h1 {
@@ -104,11 +129,22 @@ h3 {
 
 .div  {border: 1px solid #000;}
 
-.eventData, .edit-event{
+.edit-event{
   display:inline-block;
 }
-.eventInput, .save-event{
+
+.save-event{
   display:none;
+}
+
+.hiddenContainer {
+  visibility: hidden;
+  position: relative;
+}
+
+.hidden {
+  visibility: hidden;
+  position: absolute;
 }
 
 #eventAdd {

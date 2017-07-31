@@ -6,6 +6,7 @@ $(document).ready(function() {
   let eventAddForm = $('#eventAddForm');
   let closeModal = $('#closeModal');
   let currPage = 'Home';
+  let numArticles = 0;
   loadHome();
 
   //nav
@@ -33,6 +34,13 @@ $(document).ready(function() {
     event.preventDefault();
     getEventBriteEvents();
   });
+
+  $('a.moreLink').on('mouseover', function(event){
+    event.preventDefault();
+
+  }
+
+  );
   //Save New Event
   eventAddForm.on('submit', function(e) {
     e.preventDefault();
@@ -87,17 +95,18 @@ $(document).ready(function() {
     //default form reset behavior w/o passing form ID
     $("#eventsModal").modal('hide');
   });
+
 });
   // $("#addEvent").on("click")
 
 function loadHome(){
 
   let pageHeaderContent = `Events`;
-  $("#pageHeader").empty().html(pageHeaderContent);
+  setPageHeader(pageHeaderContent);
 
   //all events
   let contentHeaderContent = `<button id="eventAdd" class="btn btn-warning">Add Event</button>`;
-  $("#contentHeader").empty().html(contentHeaderContent);
+  setContentHeader(contentHeaderContent);
 
   $.ajax({
     method: 'GET',
@@ -109,10 +118,8 @@ function loadHome(){
 
 function loadAbout(){
   let pageHeaderContent = `About`;
-  $("#pageHeader").empty().html(pageHeaderContent);
-
-  $("#contentHeader").empty();
-
+  setPageHeader(pageHeaderContent);
+  setContentHeader();
 
   let contentContainerContent = `
   <h5>The Free Pizza Now Story</h5>
@@ -148,29 +155,59 @@ function loadAbout(){
   bought by a joint conglomerate of United Nations Member Nations. The company and the app are now well on their way to solving world
   hunger by connecting famine and poverty stricken populations across the world with FREE PIZZA.........NOW!!!!!!
   `;
-  $("#contentContainer").empty().html(contentContainerContent);
+
+  setContent(contentContainerContent);
 
 }
 
 function loadSignUp(){
-  $("#contentHeader").empty();
-
   let pageHeaderContent = `Sign Up for FREE PIZZA!!!!!`;
+  setPageHeader(pageHeaderContent);
+  setContentHeader();
+  setContent();
+}
+
+function setPageHeader(pageHeaderContent){
+  if (!pageHeaderContent){pageHeaderContent=""};
   $("#pageHeader").empty().html(pageHeaderContent);
 }
-//
-// });
+
+function setContentHeader(contentHeaderContent){
+  if (!contentHeaderContent){contentHeaderContent=""};
+  $("#contentHeader").empty().html(contentHeaderContent);
+}
+
+function setContent(content){
+  if (!content){content=""};
+  $("#contentContainer").empty().html(content);
+}
+
+function appendContent(content){
+  if (content){
+    $("#contentContainer").append(content);
+  }
+}
+
 function resetEventForm(){
   $("#closeModal").trigger("click");
 }
 
 function renderEvent(event) {
-  console.log(event);
+  // let eventDescHtml = event.description;
+  // let moreLink = `<a href="#" class="morelink" id="#eventDescMoreLink-${event._id}">(read more)</a>`;
+  // let eventDescHtmlDisplay = eventDescHtml.substring(0,150);
+  // let eventDescHtmlHide = eventDescHtml.substring(149);
+  //
+  // if (eventDescHtmlHide.length){
+  //   eventDescHtmlDisplay = `${eventDescHtmlDisplay} ${moreLink} <div class="hiddenContainer">`;
+  //   eventDescHtmlDisplay = `${eventDescHtmlDisplay}<div class="hidden" id="#eventDescMoreDiv-${event._id}">`;
+  //   eventDescHtmlDisplay = `${eventDescHtmlDisplay}${eventDescHtmlHide}</div></div>`;
+  // }
+
   let eventHtml = (`
     <div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
     <form id="${event._id}-update" action="#" onsubmit="return false" method="PUT"
       class="event-update-form" name="${event._id}-update">
-
         <div class="panel-default panel">
           <div class="panel-heading">
             <div class="panel-title">
@@ -181,83 +218,22 @@ function renderEvent(event) {
           <div class="eventContent">
             <div id="${event._id}-dateAndTime" class='eventData'><strong>${event.dateAndTime}</strong></div>
             <div id="${event._id}-venue" class='eventData'><strong><a href="#">${event.venue.name}</a></strong></div>
-            <div id="${event._id}-address" class='eventData'>${event.venue.address}</div>
-            <div id="${event._id}-desc" class='eventData'>${event.description}</div>
+            <div id="${event._id}-address" class='eventData'>${event.venue.address} <a href="#">(map)</a></div>
+            <div id="${event._id}-desc" class='eventData eventDesc'>${event.description}</div>
+          </div>
+          <div class='panel-footer'>
+           <button class='btn btn-primary del-event pull-right'>Delete Event</button>
+           <button class='btn btn-primary edit-event pull-right'>Edit Event</button>
+           <button class='btn btn-primary save-event pull-right'>Save Changes</button>
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-          <!-- begin event internal row -->
-            <div class='row'>
-              <div class="col-md-3 col-xs-6 thumbnail event-art">
-                <span class="eventImage">
-                  <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage">
-                </span>
-              </div>
-              <div class="col-md-9 col-xs-12">
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Event Name:</h4>
-                    <span id="${event._id}-name" class='eventData'>${event.name}</span>
-                    <span id="${event._id}-name-input-span" class='eventInput'>
-                      <input id="${event._id}-name-input" type="text" name="name" value="${event.name}" size="${event.name.length}" required>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Date and Time:</h4>
-                    <span id="${event._id}-dateAndTime" class='eventData'>${event.dateAndTime}</span>
-                    <span id="${event._id}-dateAndTime-input-span" class='eventInput'>
-                      <input id="${event._id}-dateAndTime-input" type="text" name="dateAndTime" size="${event.dateAndTime.length}" value="${event.dateAndTime}" required>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Venue:</h4>
-                    <span id="${event._id}-venue" class='eventData'>${event.venue.name}</span>
-                    <span id="${event._id}-venue-input-span" class='eventInput'>
-                      <input id="${event._id}-venue-input" type="text" name="venue"  size="${event.venue.name.length}" value="${event.venue.name}" required>
-                    </span>
-                  </li>
-
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Address:</h4>
-                    <span id="${event._id}-address" class='eventData'>${event.venue.address}</span>
-                    <span id="${event._id}-address-input-span" class='eventInput'>
-                      <input id="${event._id}-address-input" type="text" name="address"  size="${event.venue.address.length}" value="${event.venue.address}" required>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <h4 class='inline-header'>Description:</h4>
-                    <span id="${event._id}-desc" class='eventData'>${event.description}</span>
-                    <span id="${event._id}-desc-input-span" class='eventInput'>
-                      <textarea id="${event._id}-desc-input" name="description" cols="40" rows="5" required>${event.description}</textarea>
-                    </span>
-                  </li>
-                  <li class="list-group-item eventInput">
-                    <h4 class='inline-header'>Image:</h4>
-                    <span id="${event._id}-image-input-span" class='eventInput'>
-                      <input id="${event._id}-image-input" type="text" name="image"  size="50" value="${event.image}" required>
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- end of event internal row -->
-            <div class='row'>
-              <div class='panel-footer'>
-                <button class='btn btn-primary del-event pull-right'>Delete Event</button>
-                <button class='btn btn-primary edit-event pull-right'>Edit Event</button>
-                <button class='btn btn-primary save-event pull-right'>Save Changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </form>
     </div>
 
     <!-- end one event -->
   `);
-  $('#contentContainer').append(eventHtml);
+
+  appendContent(eventHtml);
 };
 
 function renderEvents(eventsList){
@@ -267,8 +243,9 @@ function renderEvents(eventsList){
 }
 
 function handleSuccessGet(eventsList){
-  console.log(eventsList);
+  setContent();
   renderEvents(eventsList);
+
 }
 
 function updateEventSuccess(event){

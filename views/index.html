@@ -31,46 +31,38 @@
   <body>
     <div class="jumbotron">
       <div class="row">
-        <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-12">
           <div id='warped'>
             <span class='w0'> </span><span class='w1'> </span><span class='w2'>F</span><span class='w3'>r</span><span class='w4'>e</span><span class='w5'>e</span><span class='w6'> </span><span class='w7'>P</span><span class='w8'>i</span><span class='w9'>z</span><span class='w10'>z</span><span class='w11'>a</span><span class='w12'> </span><span class='w13'>N</span><span class='w14'>o</span><span class='w15'>w</span><span class='w16'>!</span>
           </div>
         </div>
       </div>
     </div>
-    <div name="page" class="container-fluids">
-      <div class="row" name="header">
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-        <div class="col-xs-1">helloo</div>
-      </div>
+    <!--- content container -->
+    <div id="pageContents" class="container-fluid">
+      <!-- header bar -->
       <div class="row" name="header">
         <div class="col-xs-12 col-md-6 pull-right" name="headerRight">
           <div class="navbar pull-right">
-            <a class="btn btn-warning" href="#" id="navHome">Home</a>
-            <!-- <a class="btn btn-warning" href="#" id="navEventsList">Events</a>
-            <a class="btn btn-warning" href="#" id="navVenues">Venues</a> -->
-            <a class="btn btn-warning" href="#" id="navAbout">About</a>
-            <a class="btn btn-warning" href="#" id="navSignUp">Sign Up</a>
-            <a class="btn btn-warning" href="#" id="navEventBrite">EventBrite Seed</a>
+            <a class="btn btn-primary" href="#" id="navHome">Home</a>
+            <!-- <a class="btn btn-primary btn btn-primary-warning" href="#" id="navEventsList">Events</a>
+            <a class="btn btn-primary btn btn-primary-warning" href="#" id="navVenues">Venues</a> -->
+            <a class="btn btn-primary" href="#" id="navAbout">About</a>
+            <a class="btn btn-primary" href="#" id="navSignUp">Sign Up</a>
+            <a class="btn btn-primary" href="#" id="navEventBrite">EventBrite Seed</a>
           </div>
         </div>
+        <!-- page header (Page titles)-->
         <div class="col-xs-12 col-md-6" name="headerLeft">
           <h2 id="pageHeader"></h2>
+          <!-- contentNeader: object buttons (Add) -->
           <div id="contentHeader"></div>
         </div>
       </div>
-
+      <!-- content -->
       <div class="row align-items-start" id="contentContainer"></div>
+      <!-- padding for footer on scroll -->
+      <div id="bottomPad"></div>
     </div>
     <div class="navbar navbar-default navbar-fixed-bottom container-fluid">
       <div class="row">
