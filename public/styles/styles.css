@@ -122,13 +122,13 @@ span.nameReveal {
 }*/
 
 .panel, .modal-header {
-  border-bottom:2px solid #ec971e;
-  border-left:2px solid #ec971e;
-  border-right:2px solid #ec971e;
+  border-bottom:2px solid gray;
+  border-left:2px solid gray;
+  border-right:2px solid gray;
   border-top: 0px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  background-color: #ec971e;
+  background-color: gray;
   background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
   background-repeat: repeat-x;
 }
@@ -143,7 +143,7 @@ span.nameReveal {
   /*border-top-left-radius: 6px;
   border-top-right-radius: 6px;*/
   background-image:none;
-  background-color: #ec971e;
+  background-color: gray;
   background-image: linear-gradient(to bottom,#eb9316 0,#f0ad4e 100%);
   background-repeat: repeat-x;
   color: #fff;
@@ -173,7 +173,7 @@ span.nameReveal {
 }
 
 .eventContent  {
-  border-top: 2px solid #ec971e;
+  border-top: 2px solid #f5f5f5;
   padding:4px;
   position: relative;
   max-height: 200px;

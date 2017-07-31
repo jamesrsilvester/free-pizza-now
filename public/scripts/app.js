@@ -336,7 +336,7 @@ function handleError(err){
 }
 
 // EVENTS
-let eventbriteAPI = "https://www.eventbriteapi.com/v3/events/search/?q=pizza+OR+refreshments&sort_by=distance&location.within=5mi&location.latitude=37.7902457&location.longitude=-122.40048120000002&price=free&start_date.keyword=today&token=QZAGTH35SAKMJ2DFF3DX"
+let eventbriteAPI = "https://www.eventbriteapi.com/v3/events/search/?q=pizza+OR+refreshments&sort_by=date&location.within=5mi&location.latitude=37.7902457&location.longitude=-122.40048120000002&price=free&start_date.keyword=this_week&token=QZAGTH35SAKMJ2DFF3DX"
 
 function getEventBriteEvents(){
   $.ajax({
