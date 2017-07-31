@@ -167,15 +167,25 @@ function resetEventForm(){
 function renderEvent(event) {
   console.log(event);
   let eventHtml = (`
-    <div class="event" id="${event._id}" data-event-id="${event._id}">
-    <form id="${event._id}-update" action="#" onsubmit="return false" method="PUT" class="event-update-form" name="${event._id}-update">
-      <div class="col-md-10 col-md-offset-1">
+    <div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
+    <form id="${event._id}-update" action="#" onsubmit="return false" method="PUT"
+      class="event-update-form" name="${event._id}-update">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <span id="${event._id}-dateAndTime" class='eventData'>${event.dateAndTime}</span>
+            </div>
+          </div>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
           <!-- begin event internal row -->
             <div class='row'>
-              <div class="col-md-3 col-xs-12 thumbnail event-art">
-                <span class="eventImage"><img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage"></span>
+              <div class="col-md-3 col-xs-6 thumbnail event-art">
+                <span class="eventImage">
+                  <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage">
+                </span>
               </div>
               <div class="col-md-9 col-xs-12">
                 <ul class="list-group">
@@ -234,7 +244,7 @@ function renderEvent(event) {
             </div>
           </div>
         </div>
-      </div>
+
       </form>
     </div>
 

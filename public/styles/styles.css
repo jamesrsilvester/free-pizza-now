@@ -1,14 +1,14 @@
 body {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: 'Nunito', sans-serif;
   font-weight: 400;
 }
+.col-xs-1{border:1px solid #000;}
 
 .btn {
   padding: 4px 12px;
   color: #fff;
   margin: 4px;
 }
-
 
 .jumbotron {
   background-image: url('../images/template/slide01.jpg');
@@ -34,34 +34,39 @@ body {
 }
 
 h1 {
-  font-family: 'Slackey', cursive;
-  font-size: 64px;
+  font-family: Combo, sans-serif;
+  font-size: 80px;
+  font-weight: 700;
   padding: 0;
   margin: 0;
 }
 
 h2 {
-  font-family: 'Slackey', cursive;
+  font-family: Combo, sans-serif;
   font-size: 64px;
+  font-weight: 700;
   padding: 0;
   margin: 0;
 }
 
 h3 {
-  font-family: 'Slackey', cursive;
-  font-size: 48px;
+  font-family: Combo, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
   padding: 0;
   margin: 0;
 }
 
-.navbar-header {
-  float: right;
+.navbar {
   background-color: #fff;
   padding: 7px 7px 7px 7px;
   border-radius: 6px;
   margin-top: 7px;
   margin-right: 7px;
+  right:0px;
 }
+
+.div  {border: 1px solid #000;}
 
 .row {
   padding: 2px;
@@ -78,8 +83,6 @@ h3 {
 .eventInput, .save-event{
   display:none;
 }
-
-
 
 #eventAdd {
   margin-bottom: 10px;
