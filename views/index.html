@@ -86,70 +86,68 @@
       </div>
     </div>
 
-    <!-- begin songModal: this is not visible until you call .modal() on it -->
+    <!-- begin EventModal is not visible until you call .modal() on it -->
     <div class="modal fade" tabindex="-1" role="dialog" id="eventsModal">
-      <form name="eventAddForm" id="eventAddForm" method="POST" action="return false;">
+      <form name="eventAddForm" id="modalEventForm" method="POST" action="return false;">
+      <input type="hidden" id="modalEventId" value="">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Create Event</h4>
+            <h4 class="modal-title" id="modalH4">Create Event</h4>
           </div>
           <div class="modal-body">
 
             <fieldset class='form-horizontal'>
               <!-- Event name -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="songName">Event Name</label>
-                <div class="col-md-4">
-                  <input id="name" name="name" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+                <label class="col-md-4 control-label" for="name">Event Name</label>
+                  <input id="name" name="name" type="text" placeholder="required" class="form-control">
               </div>
               <!-- Event desc -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="description">Event Description</label>
-                <div class="col-md-4">
-                  <textarea name="description" id="description" class="form-control input-md" required></textarea>
-                </div>
+                <textarea name="description" cols="25" rows="5" id="description" class="form-control" required></textarea>
+
               </div>
               <!-- Event Date -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="events">Event Date &amp; Time</label>
-                <div class="col-md-4">
-                  <input id="dateAndTime" name="dateAndTime" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+
+                  <input id="dateAndTime" size="65" name="dateAndTime" type="text" placeholder="required" class="form-control" required>
+
               </div>
               <!-- Event Venue -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="venue">Event Venue</label>
-                <div class="col-md-4">
-                  <input id="venue" name="venue" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+
+                  <input id="venue" name="venue" size="65" style="size:75px;" type="text" placeholder="required" class="form-control" required>
+
               </div>
               <!-- Event Date -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="address">Event Address</label>
-                <div class="col-md-4">
-                  <input id="address" name="address" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+
+                  <input id="address" name="address" size="65"  type="text" placeholder="required" class="form-control" required>
+
               </div>
               <!-- Event Image -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="Image">Event Image</label>
-                <div class="col-md-4">
-                  <input id="image" name="image" type="text" placeholder="required" class="form-control input-md" required>
-                </div>
+
+                  <input id="image" name="image" size="65"  type="text" placeholder="required" class="form-control" required>
+
               </div>
             </fieldset>
 
           </div>
           <div class="modal-footer">
-            <input type="reset" class="btn btn-default" id="closeModal" closeModel="" value="Close">
+            <input type="reset" class="btn btn-primary" id="closeModal" closeModel="" value="Close">
             <button type="submit" class="btn btn-primary" id="saveEvent">Add Event</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
-    </form>
+      </form>
     </div><!-- /.modal -->
 
 

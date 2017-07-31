@@ -57,17 +57,26 @@ $(document).ready(function() {
 
     e.preventDefault();
 
+    $("#modalEventId").val()
     let id= $(this).closest('.event').data('event-id'),
     selectorId = `#${id}`,
-    selectorIdEventData = `${selectorId} .eventData`,
-    selectorIdEventInput = `${selectorId} .eventInput`,
-    selectorIdSaveEvent = `${selectorId} .save-event`,
-    selectorIdEditEvent = `${selectorId} .edit-event`;
-
-    $(selectorIdEventInput).css("display","inline-block");
-    $(selectorIdEventData).css("display","none");
-    $(selectorIdSaveEvent).css("display","inline-block");
-    $(selectorIdEditEvent).css("display","none");
+    selectorIdEventName = `${selectorId}-name`,
+    selectorIdEventDateAndTime = `${selectorId}-dateAndTime`,
+    selectorIdEventVenue = `${selectorId}-venue`,
+    selectorIdEventAddress = `${selectorId}-address`,
+    selectorIdEventDesc = `${selectorId}-desc`,
+    selectorIdEventImage = `${selectorId}-image`
+console.log($(selectorIdEventDesc).html());
+    $("#modalEventForm input[name=modalEventId]").val(id);
+    $("#modalEventForm input[name=name]").val($(selectorIdEventName).attr("data-select"));
+    $("#description ").val($(selectorIdEventDesc).html());
+    $("#modalEventForm input[name=dateAndTime]").val($(selectorIdEventDateAndTime).attr("data-select"));
+    $("#modalEventForm input[name=venue").val($(selectorIdEventVenue).attr("data-select"));
+    $("#modalEventForm input[name=address]").val($(selectorIdEventAddress).attr("data-select"));
+    $("#modalEventForm input[name=image]").val($(selectorIdEventImage).attr("src"));
+    $("#saveEvent").html("Save Event");
+    $("#modalH4").html("Edit Event");
+    $('#eventsModal').modal();
   });
 
   $('#contentContainer').on('click', '.del-event', function(e){
@@ -105,7 +114,7 @@ function loadHome(){
   setPageHeader(pageHeaderContent);
 
   //all events
-  let contentHeaderContent = `<button id="eventAdd" class="btn btn-warning">Add Event</button>`;
+  let contentHeaderContent = `<button id="eventAdd" class="btn btn-primary">Add Event</button>`;
   setContentHeader(contentHeaderContent);
 
   $.ajax({
@@ -193,41 +202,27 @@ function resetEventForm(){
 }
 
 function renderEvent(event) {
-  // let eventDescHtml = event.description;
-  // let moreLink = `<a href="#" class="morelink" id="#eventDescMoreLink-${event._id}">(read more)</a>`;
-  // let eventDescHtmlDisplay = eventDescHtml.substring(0,150);
-  // let eventDescHtmlHide = eventDescHtml.substring(149);
-  //
-  // if (eventDescHtmlHide.length){
-  //   eventDescHtmlDisplay = `${eventDescHtmlDisplay} ${moreLink} <div class="hiddenContainer">`;
-  //   eventDescHtmlDisplay = `${eventDescHtmlDisplay}<div class="hidden" id="#eventDescMoreDiv-${event._id}">`;
-  //   eventDescHtmlDisplay = `${eventDescHtmlDisplay}${eventDescHtmlHide}</div></div>`;
-  // }
 
   let eventHtml = (`
     <div class="event col-md-4 col-xs-12 col-sm-6" id="${event._id}" data-event-id="${event._id}">
-    <form id="${event._id}-update" action="#" onsubmit="return false" method="PUT"
-      class="event-update-form" name="${event._id}-update">
-        <div class="panel-default panel">
-          <div class="panel-heading">
-            <div class="panel-title">
-              <span id="${event._id}-name" class='eventData'>${event.name}</span>
-            </div>
-          </div>
-          <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage img-fluid img-thumbail">
-          <div class="eventContent">
-            <div id="${event._id}-dateAndTime" class='eventData'><strong>${event.dateAndTime}</strong></div>
-            <div id="${event._id}-venue" class='eventData'><strong><a href="#">${event.venue.name}</a></strong></div>
-            <div id="${event._id}-address" class='eventData'>${event.venue.address} <a href="#">(map)</a></div>
-            <div id="${event._id}-desc" class='eventData eventDesc'>${event.description}</div>
-          </div>
-          <div class='panel-footer'>
-           <button class='btn btn-primary del-event pull-right'>Delete Event</button>
-           <button class='btn btn-primary edit-event pull-right'>Edit Event</button>
-           <button class='btn btn-primary save-event pull-right'>Save Changes</button>
+      <div class="panel-default panel">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span id="${event._id}-name" data-select="${event.name}" class='eventData'>${event.name}</span>
           </div>
         </div>
-      </form>
+        <img src="${event.image}" id="${event._id}-image" alt="event image" class="eventImage img-fluid img-thumbail">
+        <div class="eventContent">
+          <div id="${event._id}-dateAndTime" data-select="${event.dateAndTime}" class='eventData'><strong>${event.dateAndTime}</strong></div>
+          <div id="${event._id}-venue" data-select="${event.venue.name}" class='eventData'><strong><a href="#">${event.venue.name}</a></strong></div>
+          <div id="${event._id}-address" data-select="${event.venue.address}" class='eventData'>${event.venue.address} <a href="#">(map)</a></div>
+          <div id="${event._id}-desc" class='eventData eventDesc'>${event.description}</div>
+        </div>
+        <div class='panel-footer'>
+         <button class='btn btn-primary del-event pull-right'>Delete Event</button>
+         <button class='btn btn-primary edit-event pull-right'>Edit Event</button>
+        </div>
+      </div>
     </div>
 
     <!-- end one event -->
