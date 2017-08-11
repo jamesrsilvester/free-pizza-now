@@ -2,6 +2,7 @@
 
 How the world finds free pizza.
 
+<!-- TODO: Consider giving actual bash commands to install this -->
 ## Getting Started:
 Install the following packages using npm:
 1. body-parser
@@ -18,6 +19,7 @@ With Free Pizza Now you can:
 
 ## Built With:
 * Bootstrap
+<!-- TODO: You used more technologies than just Bootstrap -->
 
 ## Authors
 * **Dan Lombardino** -  [Github Repo](https://github.com/calJersey)
